@@ -1,0 +1,49 @@
+<xml>
+    <item>
+        <nombres>
+            PRIMAVERA
+        </nombres>
+        <apellidos>
+            MENDOZA MACHADO
+        </apellidos>
+        <personacomercio_cedularuc>
+            0100068923
+        </personacomercio_cedularuc>
+        <razonsocial>
+            MENDOZA MACHADO PRIMAVERA
+        </razonsocial>
+        <nombre_comercial>
+        </nombre_comercial>
+    </item>
+    <item>
+        <nombres>
+            BEATRIZ ROSARIO
+        </nombres>
+        <apellidos>
+            JARA ZAMBRANO
+        </apellidos>
+        <personacomercio_cedularuc>
+            0101474054
+        </personacomercio_cedularuc>
+        <razonsocial>
+            JARA ZAMBRANO BEATRIZ ROSARIO
+        </razonsocial>
+        <nombre_comercial>
+        </nombre_comercial>
+    </item>
+    <item>
+        <nombres>
+            JAVIER PATRICIO
+        </nombres>
+        <apellidos>
+            SERRANO NARANJO
+        </apellidos>
+        <personacomercio_cedularuc>
+            0102175767
+        </personacomercio_cedularuc>
+        <razonsocial>
+        </razonsocial>
+        <nombre_comercial>
+        </nombre_comercial>
+    </item>
+</xml>

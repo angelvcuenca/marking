@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<tables>
+  <tabla nombre="Datos">
+    <campo>
+      <dominio>http://localhost/billingsof_core/</dominio>
+    </campo>
+    
+  </tabla>
+  
+</tables>
