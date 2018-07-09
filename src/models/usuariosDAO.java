@@ -38,14 +38,14 @@ public class usuariosDAO {
 
         Connection acceso = con.conexion();
         try {
-            String md = getMD5("A3!1VGDDAifLJSRWI0p?gH:y" + usr.getClave());
-            PreparedStatement verStmt = acceso.prepareStatement("SELECT u.id, u.PersonaComercio_cedulaRuc, u.username, u.clave, u.nombres, u.apellidos, u.id_tipo_rol\n"
+            String md = getMD5("novamoda2018@" + usr.getClave());
+            PreparedStatement verStmt = acceso.prepareStatement("SELECT u.id, u.PersonaComercio_cedulaRuc, u.username, u.clave, u.nombres, u.apellidos\n"
                     + "FROM billing_empleado u \n"
-                    + "WHERE u.username=? AND u.estaActivo = 1 AND u.ccostos_id = 1");
+                    + "WHERE u.username=? AND u.estaActivo = 1");
             verStmt.setString(1, usr.getUsername());
             ResultSet rs = verStmt.executeQuery();
             if (rs.next()) {
-                if (md.equals(rs.getString(4))) {
+                if (md.equals(rs.getString("clave"))) {
                     PreparedStatement guardarStmt = acceso.prepareStatement("UPDATE billing_empleado\n"
                             + "SET f_desde = ? \n"
                             + "WHERE id=?");
@@ -59,11 +59,11 @@ public class usuariosDAO {
                     se.setString(2, usr.getFecha_ult_conexion());
                     se.execute();
 
-                    usr.setId(rs.getString(1));
-                    usr.setPersonaComercio_cedulaRuc(rs.getString(2));
-                    usr.setNombres(rs.getString(5));
-                    usr.setApellidos(rs.getString(6));
-                    usr.setId_tipo_rol(rs.getString(7));
+                    usr.setId(rs.getString("id"));
+                    usr.setPersonaComercio_cedulaRuc(rs.getString("PersonaComercio_cedulaRuc"));
+                    usr.setNombres(rs.getString("nombres"));
+                    usr.setApellidos(rs.getString("apellidos"));
+                    //usr.setId_tipo_rol(rs.getString(7));
                     //usr.setTipo_usuario(rs.getString(8));
 
                     return true;
@@ -79,6 +79,7 @@ public class usuariosDAO {
         } finally {
             con.desconectar();
         }
+        //return false;
 
     }
 
@@ -206,7 +207,7 @@ public class usuariosDAO {
         int rpta_horario = 0;
         try {
             Connection acceso = con.conexion();
-            String md = getMD5("A3!1VGDDAifLJSRWI0p?gH:y" + clave);
+            String md = getMD5("novamoda2018@" + clave);
 
             PreparedStatement guardarStmt = acceso.prepareStatement("UPDATE billing_empleado \n"
                     + "SET  PersonaComercio_cedulaRuc=?,username=?,clave=?,nombres=?,apellidos=?, email=?, celular=?, estaActivo=?, ccostos_id=?, tipo_almacen=?\n"

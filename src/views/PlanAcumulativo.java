@@ -369,7 +369,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18)
                         .addComponent(txt_abono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel26)
@@ -416,7 +416,6 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         lb_producto.setBackground(new java.awt.Color(0, 0, 0));
         lb_producto.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        lb_producto.setForeground(new java.awt.Color(0, 0, 0));
         lb_producto.setText("-------------");
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
@@ -426,7 +425,6 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         lb_codigo2.setBackground(new java.awt.Color(0, 0, 0));
         lb_codigo2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        lb_codigo2.setForeground(new java.awt.Color(0, 0, 0));
         lb_codigo2.setText("-------------");
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
@@ -436,7 +434,6 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         pvp_sin_iva.setBackground(new java.awt.Color(0, 0, 0));
         pvp_sin_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        pvp_sin_iva.setForeground(new java.awt.Color(0, 0, 0));
         pvp_sin_iva.setText("-------------");
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
@@ -446,7 +443,6 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         pvp_con_iva.setBackground(new java.awt.Color(0, 0, 0));
         pvp_con_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        pvp_con_iva.setForeground(new java.awt.Color(0, 0, 0));
         pvp_con_iva.setText("-------------");
 
         btn_search2.setBackground(new java.awt.Color(102, 153, 0));
@@ -559,7 +555,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,7 +573,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     .addComponent(btn_modificar_reg)
                     .addComponent(btn_anular_pago)
                     .addComponent(btn_search5))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -591,9 +587,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -698,15 +693,23 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             if (new_saldo < 0) {
                 JOptionPane.showMessageDialog(null, "NO SE REALIZAR LA TAREA SALDO QUEDARA EN NEGATIVO");
             } else {
-
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto)\n"
-                        + "VALUES(?,?,?,?,?,?)");
+                
+                PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
+                ResultSet r_rol = s_rol.executeQuery();
+                String cod_user_id = null;
+                while (r_rol.next()) {
+                    cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
+                }
+                
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
                 guardarStmt.setString(4, cliente);
                 guardarStmt.setDouble(5, new_saldo);
                 guardarStmt.setDouble(6, 0);
+                guardarStmt.setString(7, cod_user_id);
 
                 guardarStmt.execute();
                 JOptionPane.showMessageDialog(null, "Abono Registrado Correctamente");
@@ -792,9 +795,16 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             if (new_saldo < 0) {
                 JOptionPane.showMessageDialog(null, "NO SE REALIZO EL PROCESO\n EL SALDO QUEDARA EN NEGATIVO");
             } else {
-
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?)");
+                
+                PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
+                ResultSet r_rol = s_rol.executeQuery();
+                String cod_user_id = null;
+                while (r_rol.next()) {
+                    cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
+                }
+            
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
@@ -802,7 +812,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(5, new_saldo);
                 guardarStmt.setDouble(6, valor_aux);
                 guardarStmt.setString(7, cod_prdo);
-
+                guardarStmt.setString(8, cod_user_id);
                 guardarStmt.execute();
 
                 /*GUARDA EL NUMERO DE FUNDA*/
