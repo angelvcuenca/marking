@@ -11,13 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.conexion_bd;
+import static views.PlanAcumulativo.jDateChooser1_ac;
 
 /**
  *
@@ -33,17 +36,17 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
     public CuentasCobrar() {
         initComponents();
-         btn_search2.setEnabled(false);
-         btn_agrega.setEnabled(false);
-         btn_abonar.setEnabled(false);
-         btn_search2.setEnabled(false);
-         btn_modificar_reg.setEnabled(false);
-         btn_anular_pago.setEnabled(false);
-         
-         valor_producto.setEnabled(false);
-         jDateChooser1.setEnabled(false);
-         txt_abono.setEnabled(false);
-         
+        btn_search2.setEnabled(false);
+        btn_agrega.setEnabled(false);
+        btn_abonar.setEnabled(false);
+        btn_search2.setEnabled(false);
+        btn_modificar_reg.setEnabled(false);
+        btn_anular_pago.setEnabled(false);
+        Calendar c2 = new GregorianCalendar();
+        jDateChooser1.setCalendar(c2);
+        valor_producto.setEnabled(false);
+        jDateChooser1.setEnabled(false);
+        txt_abono.setEnabled(false);
 
         valor_producto.setEnabled(false);
         modeloTabla_cxc.addColumn("Nro");
@@ -582,16 +585,17 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
         try {
             Connection c = con.conexion();
+             String id_cxc = cxc_id_hidden.getText();
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc cc\n"
+                    + "FROM bill_cxc_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + "\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
             Double saldo_new;
             Double new_saldo = null;
-             String fe = formato.format(fecha);
+            String fe = formato.format(fecha);
             if (rss.next()) {
                 saldo = rss.getString("saldo_client");
                 saldo_new = Double.parseDouble(saldo);
@@ -601,14 +605,15 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 updSaldo.setDate(2, java.sql.Date.valueOf(fe));
                 updSaldo.setString(3, cliente);
                 updSaldo.execute();
-            }else{
-                 btn_abonar.setEnabled(false);
-                  /*ACTULIZA EL SALDO*/
-                PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
-                        + "VALUES(?,?,?)");
+            } else {
+                btn_abonar.setEnabled(false);
+                /*ACTULIZA EL SALDO*/
+                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
+                  //      + "VALUES(?,?,?)");
+                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setString(2, cliente);
-                updteSaldo.setDate(3, java.sql.Date.valueOf(fe));
+                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                updteSaldo.setString(3, cliente);
                 updteSaldo.execute();
                 /*-----------------*/
             }
@@ -623,9 +628,9 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 while (r_rol.next()) {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
-                
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?)");
+
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id,cxc_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
@@ -633,11 +638,23 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(5, new_saldo);
                 guardarStmt.setDouble(6, 0);
                 guardarStmt.setString(7, cod_user_id);
+                guardarStmt.setString(8, id_cxc);
+                
 
                 guardarStmt.execute();
+                
+                if(new_saldo == 0){
+                    PreparedStatement updSaldocc = c.prepareStatement("UPDATE bill_cxc set estado=0, total_neto=? where id=?");
+                    updSaldocc.setDouble(1, new_saldo);
+                    updSaldocc.setString(2, id_cxc);
+                    updSaldocc.execute();
+                    cxc_id_hidden.setText("0");
+                }
+                
+                
                 JOptionPane.showMessageDialog(null, "Abono Registrado Correctamente");
                 llena_tabla(cliente);
-                
+
                 lb_producto.setText("");
                 lb_codigo2.setText("");
                 pvp_sin_iva.setText("");
@@ -677,48 +694,83 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         Double valor_aux = Double.parseDouble(valor_prod);
 
         try {
-            
+
             Connection c = con.conexion();
+            String cxc_ide = cxc_id_hidden.getText();
+            String id_cxc = "999";
+
+            String fe = formato.format(fecha);
+            if (cxc_ide.equals("0")) {
+
+                PreparedStatement newcc = c.prepareStatement("INSERT INTO bill_cxc(fecha_cobro, client_id, total_neto)\n"
+                        + "VALUES(?,?,?)");
+                newcc.setDate(1, java.sql.Date.valueOf(fe));
+                newcc.setString(2, cliente);
+                newcc.setDouble(3, valor_aux);
+                newcc.execute();
+
+                PreparedStatement pscc = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cxc cc\n"
+                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cliente + "\n"
+                        + "ORDER BY id DESC LIMIT 1");
+                ResultSet rscc = pscc.executeQuery();
+                if (rscc.next()) {
+                    id_cxc = rscc.getString("id");
+                }
+            } else {
+
+                id_cxc = cxc_ide;
+            }
+            System.out.println("----->"+id_cxc);
+
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc cc\n"
+                    + "FROM bill_cxc_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + "\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
             Double saldo_new;
             Double new_saldo = null;
             Double aux_new = null;
-            String fe = formato.format(fecha);
-                
+
             if (rss.next()) {
                 saldo = rss.getString("saldo_client");
                 saldo_new = Double.parseDouble(saldo);
                 new_saldo = (saldo_new + valor_aux) - abono;
-            
+
                 PreparedStatement updSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updSaldo.setDouble(1, new_saldo);
                 updSaldo.setDate(2, java.sql.Date.valueOf(fe));
                 updSaldo.setString(3, cliente);
                 updSaldo.execute();
-            
-                
-            }else{
-                
+
+            } else {
+
                 new_saldo = valor_aux;
                 /*ACTULIZA EL SALDO*/
-                PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
-                        + "VALUES(?,?,?)");
+                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
+                  //      + "VALUES(?,?,?)");
+                 PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setString(2, cliente);
-                updteSaldo.setDate(3, java.sql.Date.valueOf(fe));
+                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                updteSaldo.setString(3, cliente);
                 updteSaldo.execute();
                 /*-----------------*/
             }
-            
+
             if (new_saldo < 0) {
                 JOptionPane.showMessageDialog(null, "NO SE REALIZO EL PROCESO\n EL SALDO QUEDARA EN NEGATIVO");
             } else {
+                /* PreparedStatement pcc = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cxc cc\n"
+                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cliente + "\n"
+                        + "ORDER BY id DESC LIMIT 1");
+                ResultSet rcc = pcc.executeQuery();
+                if (rcc.next()) {
+                    id_cxc = rcc.getString("id");
+                }*/
+                cxc_id_hidden.setText(id_cxc);
                 
                 PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
                 ResultSet r_rol = s_rol.executeQuery();
@@ -726,9 +778,9 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 while (r_rol.next()) {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
-                
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?,?)");
+
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id, cxc_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
@@ -737,10 +789,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(6, valor_aux);
                 guardarStmt.setString(7, cod_prdo);
                 guardarStmt.setString(8, cod_user_id);
+                guardarStmt.setString(9, id_cxc);
 
                 guardarStmt.execute();
-                
-                
+
                 JOptionPane.showMessageDialog(null, "Producto Registrado Correctamente");
                 llena_tabla(cliente);
 
@@ -766,7 +818,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         try {
             MessageFormat headerFormat = new MessageFormat("Registro de Saldos");
             MessageFormat fooderFormat = new MessageFormat("Registro de Saldos");
-            tablecxc.print(JTable.PrintMode.FIT_WIDTH, headerFormat,fooderFormat);
+            tablecxc.print(JTable.PrintMode.FIT_WIDTH, headerFormat, fooderFormat);
         } catch (Exception e) {
             Logger.getLogger(CuentasCobrar.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -790,21 +842,21 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         try {
             Connection c = con.conexion();
             PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
-                    + "FROM bill_cxc cc\n"
+                    + "FROM bill_cxc_det cc\n"
                     + "WHERE cc.estado = 1 AND cc.saldo_client =0 AND cc.client_id =" + cedula_selec + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rs = ps.executeQuery();
             int id_ultimo = 0;
             if (rs.next()) {
-                 id_ultimo = rs.getInt("id");
+                id_ultimo = rs.getInt("id");
             }
-            
+
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc cc\n"
+                    + "FROM bill_cxc_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
                     + "LEFT JOIN bill_cxc_saldos ps ON ps.client_id = cc.client_id\n"
-                    + "WHERE ps.saldo > 0 AND cc.estado = 1 AND cc.client_id =" + cedula_selec+"\n"
-                            + "AND cc.id >"+id_ultimo);
+                    + "WHERE ps.saldo > 0 AND cc.estado = 1 AND cc.client_id =" + cedula_selec + "\n"
+                    + "AND cc.id >" + id_ultimo);
             ResultSet rss = pss.executeQuery();
             String est = null;
             while (rss.next()) {

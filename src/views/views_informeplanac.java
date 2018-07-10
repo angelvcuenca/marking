@@ -9,6 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.table.DefaultTableModel;
 import models.*;
 
@@ -26,12 +30,22 @@ public class views_informeplanac extends javax.swing.JInternalFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     public views_informeplanac() {
         initComponents();
+        Calendar c2 = new GregorianCalendar();
+        jDateChooser1.setCalendar(c2);
+        jDateChooser2.setCalendar(c2);
+        
+        
+        Date fecha_desde = jDateChooser1.getDate();
+        Date fecha_fin = jDateChooser2.getDate();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String f_ini = formato.format(fecha_desde);
+        String f_fin = formato.format(fecha_fin);
         
         modeloTabla.addColumn("Cedula");
         modeloTabla.addColumn("Cliente");
         modeloTabla.addColumn("Direccion");
         modeloTabla.addColumn("Telefonos");
-        modeloTabla.addColumn("Fecha Retiro");
+        modeloTabla.addColumn("Fecha Registro");
         modeloTabla.addColumn("Valor Total");
         modeloTabla.addColumn("Fecha ult. Abono");
         modeloTabla.addColumn("Valor Abono");
@@ -47,6 +61,24 @@ public class views_informeplanac extends javax.swing.JInternalFrame {
         }
         try {
             Connection c = con.conexion();
+            /*FECHA ULTIMO */
+           /* SELECT
+	fecha_cobro
+FROM
+	bill_cxc_ac
+WHERE client_id  = 1104133648 AND saldo_client > 0 AND tipotransaccion_cod = 1
+ORDER BY
+	id DESC
+LIMIT 1;*/
+
+            PreparedStatement uabon = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
+            ResultSet r_rol = uabon.executeQuery();
+            String cod_user_id = null;
+            while (r_rol.next()) {
+                cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
+            }
+                
+            
             PreparedStatement pss = c.prepareStatement("SELECT PersonaComercio_cedulaRuc,CONCAT(nombres,' ',apellidos) cliente,\n"
                     + "direccion, telefonos,fecha_nacimiento_cli,\n"
                     + "TIMESTAMPDIFF(YEAR,fecha_nacimiento_cli,CURDATE()) AS edad\n"

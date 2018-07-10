@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -44,7 +46,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         valor_producto.setEnabled(false);
         jDateChooser1_ac.setEnabled(false);
         txt_abono.setEnabled(false);
-
+        Calendar c2 = new GregorianCalendar();
+        jDateChooser1_ac.setCalendar(c2);
         valor_producto.setEnabled(false);
         modeloTabla_cxc.addColumn("Nro");
         modeloTabla_cxc.addColumn("Fecha");
@@ -613,10 +616,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         try {
             Connection c = con.conexion();
+             String id_cxc = cxc_id_hidden_ac.getText();
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc_ac cc\n"
+                    + "FROM bill_cxc_ac_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + "\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
@@ -681,11 +685,12 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             } else {
                 btn_abonar.setEnabled(false);
                 /*ACTULIZA EL SALDO*/
-                PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
-                        + "VALUES(?,?,?)");
+                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
+                  //      + "VALUES(?,?,?)");
+                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setString(2, cliente);
-                updteSaldo.setDate(3, java.sql.Date.valueOf(fe));
+                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                updteSaldo.setString(3, cliente);
                 updteSaldo.execute();
                 /*-----------------*/
             }
@@ -701,8 +706,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
                 
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?)");
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id,cxc_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
@@ -710,8 +715,17 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(5, new_saldo);
                 guardarStmt.setDouble(6, 0);
                 guardarStmt.setString(7, cod_user_id);
+                 guardarStmt.setString(8, id_cxc);
 
                 guardarStmt.execute();
+                
+                if(new_saldo == 0){
+                    PreparedStatement updSaldocc = c.prepareStatement("UPDATE bill_cxc_ac set estado=0, total_neto=? where id=?");
+                    updSaldocc.setDouble(1, new_saldo);
+                    updSaldocc.setString(2, id_cxc);
+                    updSaldocc.execute();
+                    cxc_id_hidden_ac.setText("0");
+                }
                 JOptionPane.showMessageDialog(null, "Abono Registrado Correctamente");
                 llena_tabla(cliente);
 
@@ -756,17 +770,43 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         try {
 
             Connection c = con.conexion();
+            String cxc_ide = cxc_id_hidden_ac.getText();
+            String id_cxc = "999";
+
+            String fe = formato.format(fecha);
+            if (cxc_ide.equals("0")) {
+
+                PreparedStatement newcc = c.prepareStatement("INSERT INTO bill_cxc_ac(fecha_cobro, client_id, total_neto)\n"
+                        + "VALUES(?,?,?)");
+                newcc.setDate(1, java.sql.Date.valueOf(fe));
+                newcc.setString(2, cliente);
+                newcc.setDouble(3, valor_aux);
+                newcc.execute();
+
+                PreparedStatement pscc = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cxc_ac cc\n"
+                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cliente + "\n"
+                        + "ORDER BY id DESC LIMIT 1");
+                ResultSet rscc = pscc.executeQuery();
+                if (rscc.next()) {
+                    id_cxc = rscc.getString("id");
+                }
+            } else {
+
+                id_cxc = cxc_ide;
+            }
+            
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                     + "FROM bill_cxc_ac cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + "\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
             Double saldo_new;
             Double new_saldo = null;
             Double aux_new = null;
-            String fe = formato.format(fecha);
+           
 
             if (rss.next()) {
                 saldo = rss.getString("saldo_client");
@@ -783,11 +823,12 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
                 new_saldo = valor_aux;
                 /*ACTULIZA EL SALDO*/
-                PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
-                        + "VALUES(?,?,?)");
+                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
+                  //      + "VALUES(?,?,?)");
+                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setString(2, cliente);
-                updteSaldo.setDate(3, java.sql.Date.valueOf(fe));
+                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                updteSaldo.setString(3, cliente);
                 updteSaldo.execute();
                 /*-----------------*/
             }
@@ -803,8 +844,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
             
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?,?)");
+                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id,cxc_id)\n"
+                        + "VALUES(?,?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
                 guardarStmt.setDouble(2, abono);
                 guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
@@ -813,6 +854,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(6, valor_aux);
                 guardarStmt.setString(7, cod_prdo);
                 guardarStmt.setString(8, cod_user_id);
+                guardarStmt.setString(9, id_cxc);
                 guardarStmt.execute();
 
                 /*GUARDA EL NUMERO DE FUNDA*/
@@ -901,7 +943,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         try {
             Connection c = con.conexion();
             PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
-                    + "FROM bill_cxc_ac cc\n"
+                    + "FROM bill_cxc_ac_det cc\n"
                     + "WHERE cc.estado = 1 AND cc.saldo_client =0 AND cc.client_id =" + cedula_selec + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rs = ps.executeQuery();
@@ -911,7 +953,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             }
 
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc_ac cc\n"
+                    + "FROM bill_cxc_ac_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
                     + "LEFT JOIN bill_cxc_saldos_ac ps ON ps.client_id = cc.client_id\n"
                     + "WHERE ps.saldo > 0 AND cc.estado = 1 AND cc.client_id =" + cedula_selec + "\n"

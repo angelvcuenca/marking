@@ -394,7 +394,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 }
 
                 /*BUSCA EL CLIENTE SI TIENE PLAN ACUMULATIVO*/
-                PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
+                /*PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
                         + "FROM bill_cxc_ac cc\n"
                         + "WHERE cc.estado = 1  AND cc.saldo_client =0 AND cc.client_id =" + cedula_selec + "\n"
                         + "ORDER BY id DESC LIMIT 1");
@@ -403,25 +403,35 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 while (rs.next()) {
                     id_ultimo = rs.getInt("id");
 
+                */
+                
+                PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cx_ac cc\n"
+                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cedula_selec);
+                ResultSet rs = ps.executeQuery();
+                int cxc_id = 0;
+                if (rs.next()) {
+                    cxc_id = rs.getInt("id");
+                     cxc_id_hidden_ac.setText(String.valueOf(cxc_id));
                 }
-                System.out.println("---->1111" + id_ultimo);
+                System.out.println("---->1111" + cxc_id);
                 PreparedStatement psos = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                        + "FROM bill_cxc_ac cc\n"
+                        + "FROM bill_cxc_ac_det cc\n"
                         + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
                         + "WHERE  cc.estado = 1 AND cc.client_id = ?\n"
-                        + "AND cc.id > ?");
+                        + "AND cc.cxc_id = " + cxc_id);
 
                 psos.setString(1, cedula_selec);
-                psos.setInt(2, id_ultimo);
+                psos.setInt(2, cxc_id);
                 ResultSet rsos = psos.executeQuery();
 
                 String est = null;
                 int info_ac = 0;
-                cxc_id_hidden_ac.setText("0");
+               
                 btn_abonar.setEnabled(false);
                 txt_abono.setEnabled(false);
                 while (rsos.next()) {
-                    cxc_id_hidden_ac.setText("1");
+                  
                     info_ac = rsos.getInt("id");
 
                     Double saldo_estado = rsos.getDouble("saldo_client");

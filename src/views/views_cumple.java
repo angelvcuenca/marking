@@ -9,6 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.table.DefaultTableModel;
 import models.*;
 
@@ -26,6 +30,12 @@ public class views_cumple extends javax.swing.JInternalFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     public views_cumple() {
         initComponents();
+        Calendar c2 = new GregorianCalendar();
+        jDateChooser1.setCalendar(c2);
+        
+        Date fecha = jDateChooser1.getDate();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_new = formato.format(fecha);
         
         modeloTabla.addColumn("Cedula");
         modeloTabla.addColumn("Cliente");
@@ -34,11 +44,11 @@ public class views_cumple extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Fecha Nacimiento");
         modeloTabla.addColumn("Edad");
         
-        llena_tabla();
+        llena_tabla(fecha_new);
         
     }
     
-     public void llena_tabla() {
+     public void llena_tabla(String fecha) {
         while (modeloTabla.getRowCount() > 0) {
             modeloTabla.removeRow(0);
         }
@@ -48,8 +58,8 @@ public class views_cumple extends javax.swing.JInternalFrame {
                     + "direccion, telefonos,fecha_nacimiento_cli,\n"
                     + "TIMESTAMPDIFF(YEAR,fecha_nacimiento_cli,CURDATE()) AS edad\n"
                     + "FROM billing_cliente\n"
-                    + "WHERE DAY (fecha_nacimiento_cli) = DAY (NOW())\n"
-                    + "AND MONTH (fecha_nacimiento_cli) = MONTH (NOW())");
+                    + "WHERE DAY (fecha_nacimiento_cli) = DAY ('"+fecha+"')\n"
+                    + "AND MONTH (fecha_nacimiento_cli) = MONTH ('"+fecha+"')");
 
             ResultSet rss = pss.executeQuery();
             while (rss.next()) {
@@ -87,6 +97,8 @@ public class views_cumple extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
 
@@ -122,37 +134,53 @@ public class views_cumple extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(0, 153, 204));
         jLabel1.setText("LISTADO DE CUMPLEAÑEROS");
 
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jLabel2.setText("FECHA CUMPLEAÑOS");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addGap(60, 60, 60))
+                .addGap(81, 81, 81)
+                .addComponent(jLabel2)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(202, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jLabel1)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(20, 20, 20))
+                .addComponent(jButton2)
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,14 +198,19 @@ public class views_cumple extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       llena_tabla();
+        Date fecha = jDateChooser1.getDate();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_new = formato.format(fecha);
+        llena_tabla(fecha_new);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -365,27 +365,28 @@ public class addCliente extends javax.swing.JInternalFrame {
 
                 PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
                         + "FROM bill_cxc cc\n"
-                        + "WHERE cc.estado = 1 AND cc.saldo_client =0 AND cc.client_id =" + cedula_selec + "\n"
-                        + "ORDER BY id DESC LIMIT 1");
+                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cedula_selec);
                 ResultSet rs = ps.executeQuery();
-                int id_ultimo = 0;
+                int cxc_id = 0;
                 if (rs.next()) {
-                    id_ultimo = rs.getInt("id");
+                    cxc_id = rs.getInt("id");
+                     cxc_id_hidden.setText(String.valueOf(cxc_id));
                 }
 
                 PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                        + "FROM bill_cxc cc\n"
+                        + "FROM bill_cxc_det cc\n"
                         + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
                         + "WHERE  cc.estado = 1 AND cc.client_id =" + cedula_selec + "\n"
-                        + "AND cc.id >" + id_ultimo);
+                        + "AND cc.cxc_id = " + cxc_id);
                 ResultSet rss = pss.executeQuery();
 
                 String est = null;
                 int info = 0;
                 while (rss.next()) {
-                    cxc_id_hidden.setText("1");
+                    
                     info = rss.getInt("id");
-
+                   
+                    
                     Double saldo_estado = rss.getDouble("saldo_client");
                     if (saldo_estado == 0) {
                         est = "CANCELADO";
