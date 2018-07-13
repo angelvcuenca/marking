@@ -291,10 +291,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem7.setText("Informe CxC");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         menu_informes.add(jMenuItem7);
 
         jMenuItem8.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem8.setText("Informe Plan Ac.");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         menu_informes.add(jMenuItem8);
 
         jMenuItem15.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
@@ -399,6 +409,18 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.add(reguser);
         reguser.show();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       views_informecxc views = new views_informecxc();
+       jDesktopPane1.add(views);
+       views.show();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        views_informe_planac plan_ac = new views_informe_planac();
+        jDesktopPane1.add(plan_ac);
+        plan_ac.show();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

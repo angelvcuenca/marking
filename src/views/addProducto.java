@@ -476,7 +476,7 @@ public class addProducto extends javax.swing.JInternalFrame {
             btn_search2.setEnabled(true);
             btn_agrega.setEnabled(true);
             txt_abono.setEnabled(true);
-            btn_modificar_reg.setEnabled(true);
+            btn_anular_todo.setEnabled(true);
             btn_anular_pago.setEnabled(true);
             btn_abonar.setEnabled(false);
 

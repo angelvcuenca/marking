@@ -40,7 +40,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_agrega.setEnabled(false);
         btn_abonar.setEnabled(false);
         btn_search2.setEnabled(false);
-        btn_modificar_reg.setEnabled(false);
+        btn_anular_todo.setEnabled(false);
         btn_anular_pago.setEnabled(false);
         Calendar c2 = new GregorianCalendar();
         jDateChooser1.setCalendar(c2);
@@ -109,7 +109,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         pvp_con_iva = new javax.swing.JLabel();
         btn_search2 = new javax.swing.JButton();
-        btn_modificar_reg = new javax.swing.JButton();
+        btn_anular_todo = new javax.swing.JButton();
         btn_anular_pago = new javax.swing.JButton();
         btn_search5 = new javax.swing.JButton();
 
@@ -488,15 +488,25 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btn_modificar_reg.setBackground(new java.awt.Color(204, 204, 0));
-        btn_modificar_reg.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        btn_modificar_reg.setForeground(new java.awt.Color(255, 255, 255));
-        btn_modificar_reg.setText("Modificar");
+        btn_anular_todo.setBackground(new java.awt.Color(153, 0, 0));
+        btn_anular_todo.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        btn_anular_todo.setForeground(new java.awt.Color(255, 255, 255));
+        btn_anular_todo.setText("Anular Todo");
+        btn_anular_todo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anular_todoActionPerformed(evt);
+            }
+        });
 
-        btn_anular_pago.setBackground(new java.awt.Color(102, 0, 0));
+        btn_anular_pago.setBackground(new java.awt.Color(51, 0, 102));
         btn_anular_pago.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_anular_pago.setForeground(new java.awt.Color(255, 255, 255));
-        btn_anular_pago.setText("Anular");
+        btn_anular_pago.setText("Anular Registro");
+        btn_anular_pago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anular_pagoActionPerformed(evt);
+            }
+        });
 
         btn_search5.setBackground(new java.awt.Color(102, 102, 102));
         btn_search5.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
@@ -518,7 +528,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_search5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_modificar_reg)
+                        .addComponent(btn_anular_todo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_anular_pago))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -542,7 +552,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_modificar_reg)
+                    .addComponent(btn_anular_todo)
                     .addComponent(btn_anular_pago)
                     .addComponent(btn_search5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -721,7 +731,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
                 id_cxc = cxc_ide;
             }
-            System.out.println("----->"+id_cxc);
+            
 
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                     + "FROM bill_cxc_det cc\n"
@@ -748,15 +758,32 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             } else {
 
                 new_saldo = valor_aux;
-                /*ACTULIZA EL SALDO*/
-                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
-                  //      + "VALUES(?,?,?)");
-                 PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                 PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cxc_saldos cc\n"
+                        + "WHERE cc.client_id =" + cliente);
+                ResultSet ra = ca.executeQuery();
+                int encontro=0;
+                if (ra.next()) {
+                    encontro = ra.getInt("id");
+                }
+                
+                if(encontro == 0){
+                    PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,fecha,client_id)\n"
+                       + "VALUES(?,?,?)");
+                //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
                 updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
                 updteSaldo.setString(3, cliente);
                 updteSaldo.execute();
-                /*-----------------*/
+                }else{
+                  //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,fecha,client_id)\n"
+                    //   + "VALUES(?,?,?)");
+                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
+                updteSaldo.setDouble(1, new_saldo);
+                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                updteSaldo.setString(3, cliente);
+                updteSaldo.execute();
+                }
             }
 
             if (new_saldo < 0) {
@@ -823,6 +850,136 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             Logger.getLogger(CuentasCobrar.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btn_search5ActionPerformed
+
+    private void btn_anular_todoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_todoActionPerformed
+        String cxc_id = cxc_id_hidden.getText();
+        int n = JOptionPane.showConfirmDialog(
+                null, "Esta seguro de eliminar todo la CxC?",
+                "Eliga una opcion",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            System.out.println("siii");
+            try {
+
+                Connection c = con.conexion();
+
+                PreparedStatement psos = c.prepareStatement("SELECT *\n"
+                        + "FROM bill_cxc \n"
+                        + "WHERE  id =? ");
+                psos.setString(1, cxc_id);
+                ResultSet rsos = psos.executeQuery();
+                String cedula = "";
+                while (rsos.next()) {
+                    cedula = rsos.getString("client_id");
+                }
+
+                /*ACTULIZA PRIMERO LA TABLA CXC*/
+                PreparedStatement upt_cxc = c.prepareStatement("UPDATE bill_cxc set estado=0 WHERE id=?");
+                upt_cxc.setString(1, cxc_id);
+                upt_cxc.execute();
+
+                /*--------*/
+ /*ACTULIZA PRIMERO LA TABLA CXC_SALDO*/
+                PreparedStatement upt_cxc_sl = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=0 WHERE client_id=?");
+                upt_cxc_sl.setString(1, cedula);
+                upt_cxc_sl.execute();
+
+                /*--------*/
+ /*ACTULIZA PRIMERO LA TABLA CXC_DET*/
+                PreparedStatement upt_cxc_det = c.prepareStatement("UPDATE bill_cxc_det set estado=0 WHERE cxc_id=?");
+                upt_cxc_det.setString(1, cxc_id);
+                upt_cxc_det.execute();
+
+                /*--------*/
+                llena_tabla(cedula);
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                con.desconectar();
+            }
+        } else if (n == JOptionPane.NO_OPTION) {
+            System.out.println("noo");
+        }
+    }//GEN-LAST:event_btn_anular_todoActionPerformed
+
+    private void btn_anular_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_pagoActionPerformed
+        String cxc_id = cxc_id_hidden.getText();
+        int filaEditar = tablecxc.getSelectedRow();
+        int numfilas = tablecxc.getSelectedRowCount();
+        if (filaEditar >= 0 && numfilas == 1) {
+            String id_cxc_det = String.valueOf(tablecxc.getValueAt(filaEditar, 0));
+            int n = JOptionPane.showConfirmDialog(
+                    null, "Esta seguro de eliminar el registro seleccioando ?",
+                    "Eliga una opcion",
+                    JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION) {
+                try {
+
+                    Connection c = con.conexion();
+
+                    PreparedStatement psos = c.prepareStatement("SELECT *\n"
+                            + "FROM bill_cxc \n"
+                            + "WHERE  id =? ");
+                    psos.setString(1, cxc_id);
+                    ResultSet rsos = psos.executeQuery();
+                    String cedula = "";
+                    while (rsos.next()) {
+                        cedula = rsos.getString("client_id");
+                    }
+
+                    PreparedStatement tips = c.prepareStatement("SELECT *\n"
+                            + "FROM bill_cxc_det \n"
+                            + "WHERE  id =? ");
+                    tips.setString(1, id_cxc_det);
+                    ResultSet tr = tips.executeQuery();
+                    String tipotrans = "";
+                    Double total_net = 0.00;
+                    Double cuota_net = 0.00;
+                    Double saldo_net = 0.00;
+                    while (tr.next()) {
+                        tipotrans = tr.getString("tipotransaccion_cod");
+                        total_net = tr.getDouble("total_neto");
+                        cuota_net = tr.getDouble("cuota_neto");
+                        saldo_net = tr.getDouble("saldo_client");
+                    }
+
+                    /*ACTULIZA PRIMERO LA TABLA CXC_DET*/
+                    PreparedStatement upt_cxc_det = c.prepareStatement("UPDATE bill_cxc_det set estado=0 WHERE id=?");
+                    upt_cxc_det.setString(1, id_cxc_det);
+                    upt_cxc_det.execute();
+
+                    /*--------*/
+
+ /*ACTULIZA PRIMERO LA TABLA CXC_SALDO*/
+                    Double saldo_new = 0.00;
+                    if (tipotrans.equals("1")) {
+                        saldo_new = saldo_net - total_net;
+                    }
+                    if (tipotrans.equals("2")) {
+                        saldo_new = saldo_net + cuota_net;
+                    }
+                    PreparedStatement upt_cxc_sl = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=? WHERE client_id=?");
+                    upt_cxc_sl.setDouble(1, saldo_new);
+                    upt_cxc_sl.setString(2, cedula);
+                    upt_cxc_sl.execute();
+
+                    /*--------*/
+                    llena_tabla(cedula);
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                } finally {
+                    con.desconectar();
+                }
+            } else if (n == JOptionPane.NO_OPTION) {
+                System.out.println("noo");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR AL MENOS UN DATO PARA EDITAR");
+        }
+
+
+    }//GEN-LAST:event_btn_anular_pagoActionPerformed
     public void limpiar_campor() {
         lb_producto.setText("");
         lb_codigo2.setText("");
@@ -891,7 +1048,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     public static javax.swing.JButton btn_abonar;
     public static javax.swing.JButton btn_agrega;
     public static javax.swing.JButton btn_anular_pago;
-    public static javax.swing.JButton btn_modificar_reg;
+    public static javax.swing.JButton btn_anular_todo;
     public javax.swing.JButton btn_search1;
     public static javax.swing.JButton btn_search2;
     public javax.swing.JButton btn_search5;

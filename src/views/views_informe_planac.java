@@ -18,7 +18,7 @@ import models.*;
  *
  * @author Elizabeth
  */
-public class views_informecxc extends javax.swing.JInternalFrame {
+public class views_informe_planac extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form views_cumple
@@ -26,7 +26,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
     conexion_bd con = new conexion_bd();
     DefaultTableModel modeloTabla = new DefaultTableModel();
 
-    public views_informecxc() {
+    public views_informe_planac() {
         initComponents();
 
         modeloTabla.addColumn("Cedula");
@@ -59,9 +59,9 @@ public class views_informecxc extends javax.swing.JInternalFrame {
 
             PreparedStatement pss = c.prepareStatement("SELECT cc.id idcxc,cc.client_id, CONCAT(cl.nombres,' ',cl.apellidos) cliente, cl.direccion, cl.telefonos,\n"
                     + "cc.fecha_cobro fecha_reg, sl.saldo saldo_total\n"
-                    + "FROM bill_cxc cc \n"
+                    + "FROM bill_cxc_ac cc \n"
                     + "JOIN billing_cliente cl ON cl.PersonaComercio_cedulaRuc = cc.client_id\n"
-                    + "JOIN bill_cxc_saldos sl ON sl.client_id = cc.client_id\n"
+                    + "JOIN bill_cxc_saldos_ac sl ON sl.client_id = cc.client_id\n"
                     + "WHERE "+where_data);
 
             ResultSet rss = pss.executeQuery();
@@ -69,7 +69,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
             while (rss.next()) {
                 cxc_id = rss.getInt("idcxc");
                 PreparedStatement abono = c.prepareStatement("SELECT SUM(total_neto) total\n"
-                        + "FROM bill_cxc_det\n"
+                        + "FROM bill_cxc_ac_det\n"
                         + "WHERE estado=1 AND tipotransaccion_cod = 1 AND cxc_id =" + cxc_id);
                 ResultSet r_abon = abono.executeQuery();
                 Double total = null;
@@ -77,8 +77,8 @@ public class views_informecxc extends javax.swing.JInternalFrame {
                     total = r_abon.getDouble("total");
                 }
                 PreparedStatement abo = c.prepareStatement("SELECT cuota_neto,fecha_cobro\n"
-                        + "FROM bill_cxc_det\n"
-                        + "WHERE estado=1 AND tipotransaccion_cod = 2 AND cxc_id =" + cxc_id);
+                        + "FROM bill_cxc_ac_det\n"
+                        + "WHERE estado=1 AND  tipotransaccion_cod = 2 AND cxc_id =" + cxc_id);
                 ResultSet rab = abo.executeQuery();
                 Double total_ab = 0.00;
                 String fecha_ult_abono = "0.00";
@@ -165,8 +165,8 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         jButton2.setText("Imprimir Reporte");
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 153, 0));
-        jLabel1.setText("INFORME DE CUENTAS POR COBRAR");
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel1.setText("INFORME PLAN ACUMULATIVO");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel2.setText("CEDULA/PASS DEL CLIENTE");
@@ -205,21 +205,20 @@ public class views_informecxc extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addGap(37, 37, 37))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(155, 155, 155))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addContainerGap())))
+                .addContainerGap(961, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)

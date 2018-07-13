@@ -39,7 +39,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         btn_agrega.setEnabled(false);
         btn_abonar.setEnabled(false);
         btn_search2.setEnabled(false);
-        btn_modificar_reg.setEnabled(false);
+        btn_anular_todo.setEnabled(false);
         btn_anular_pago.setEnabled(false);
         txt_nro_funda.setEnabled(false);
 
@@ -112,11 +112,12 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         pvp_con_iva = new javax.swing.JLabel();
         btn_search2 = new javax.swing.JButton();
-        btn_modificar_reg = new javax.swing.JButton();
+        btn_anular_todo = new javax.swing.JButton();
         btn_anular_pago = new javax.swing.JButton();
         btn_search5 = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("MODULO PLAN ACUMULATIVO");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -514,15 +515,20 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btn_modificar_reg.setBackground(new java.awt.Color(204, 204, 0));
-        btn_modificar_reg.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        btn_modificar_reg.setForeground(new java.awt.Color(255, 255, 255));
-        btn_modificar_reg.setText("Modificar");
+        btn_anular_todo.setBackground(new java.awt.Color(153, 0, 0));
+        btn_anular_todo.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        btn_anular_todo.setForeground(new java.awt.Color(255, 255, 255));
+        btn_anular_todo.setText("Anular Todo");
+        btn_anular_todo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anular_todoActionPerformed(evt);
+            }
+        });
 
-        btn_anular_pago.setBackground(new java.awt.Color(102, 0, 0));
+        btn_anular_pago.setBackground(new java.awt.Color(51, 0, 102));
         btn_anular_pago.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_anular_pago.setForeground(new java.awt.Color(255, 255, 255));
-        btn_anular_pago.setText("Anular");
+        btn_anular_pago.setText("Anular Registro");
         btn_anular_pago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_anular_pagoActionPerformed(evt);
@@ -549,8 +555,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_search5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_modificar_reg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_anular_todo)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_anular_pago))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -573,10 +579,10 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_modificar_reg)
-                    .addComponent(btn_anular_pago)
-                    .addComponent(btn_search5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_anular_todo)
+                    .addComponent(btn_search5)
+                    .addComponent(btn_anular_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -616,11 +622,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         try {
             Connection c = con.conexion();
-             String id_cxc = cxc_id_hidden_ac.getText();
+            String id_cxc = cxc_id_hidden_ac.getText();
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                     + "FROM bill_cxc_ac_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
@@ -686,7 +692,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 btn_abonar.setEnabled(false);
                 /*ACTULIZA EL SALDO*/
                 //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
-                  //      + "VALUES(?,?,?)");
+                //      + "VALUES(?,?,?)");
                 PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
                 updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
@@ -698,14 +704,14 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             if (new_saldo < 0) {
                 JOptionPane.showMessageDialog(null, "NO SE REALIZAR LA TAREA SALDO QUEDARA EN NEGATIVO");
             } else {
-                
+
                 PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
                 ResultSet r_rol = s_rol.executeQuery();
                 String cod_user_id = null;
                 while (r_rol.next()) {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
-                
+
                 PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto,tipopago_id,cxc_id)\n"
                         + "VALUES(?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
@@ -715,11 +721,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(5, new_saldo);
                 guardarStmt.setDouble(6, 0);
                 guardarStmt.setString(7, cod_user_id);
-                 guardarStmt.setString(8, id_cxc);
+                guardarStmt.setString(8, id_cxc);
 
                 guardarStmt.execute();
-                
-                if(new_saldo == 0){
+
+                if (new_saldo == 0) {
                     PreparedStatement updSaldocc = c.prepareStatement("UPDATE bill_cxc_ac set estado=0, total_neto=? where id=?");
                     updSaldocc.setDouble(1, new_saldo);
                     updSaldocc.setString(2, id_cxc);
@@ -795,18 +801,17 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
                 id_cxc = cxc_ide;
             }
-            
+
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc_ac cc\n"
+                    + "FROM bill_cxc_ac_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
             Double saldo_new;
             Double new_saldo = null;
             Double aux_new = null;
-           
 
             if (rss.next()) {
                 saldo = rss.getString("saldo_client");
@@ -822,28 +827,46 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             } else {
 
                 new_saldo = valor_aux;
-                /*ACTULIZA EL SALDO*/
-                //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,client_id, fecha)\n"
-                  //      + "VALUES(?,?,?)");
-                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
-                updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                updteSaldo.setString(3, cliente);
-                updteSaldo.execute();
-                /*-----------------*/
+                PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
+                        + "FROM bill_cxc_saldos_ac cc\n"
+                        + "WHERE cc.client_id =" + cliente);
+                ResultSet ra = ca.executeQuery();
+                int encontro = 0;
+                if (ra.next()) {
+                    encontro = ra.getInt("id");
+                }
+
+                if (encontro == 0) {
+                    PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
+                            + "VALUES(?,?,?)");
+                    //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                    updteSaldo.setDouble(1, new_saldo);
+                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                    updteSaldo.setString(3, cliente);
+                    updteSaldo.execute();
+                } else {
+                    //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
+                    //   + "VALUES(?,?,?)");
+                    PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                    updteSaldo.setDouble(1, new_saldo);
+                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                    updteSaldo.setString(3, cliente);
+                    updteSaldo.execute();
+                }
+
             }
 
             if (new_saldo < 0) {
                 JOptionPane.showMessageDialog(null, "NO SE REALIZO EL PROCESO\n EL SALDO QUEDARA EN NEGATIVO");
             } else {
-                
+                cxc_id_hidden_ac.setText(id_cxc);
                 PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
                 ResultSet r_rol = s_rol.executeQuery();
                 String cod_user_id = null;
                 while (r_rol.next()) {
                     cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
                 }
-            
+
                 PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id,cxc_id)\n"
                         + "VALUES(?,?,?,?,?,?,?,?,?)");
                 guardarStmt.setInt(1, tipo_transaccion);
@@ -922,8 +945,136 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_search5ActionPerformed
 
     private void btn_anular_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_pagoActionPerformed
-        // TODO add your handling code here:
+        String cxc_id = cxc_id_hidden_ac.getText();
+        int filaEditar = tablecxc_ac.getSelectedRow();
+        int numfilas = tablecxc_ac.getSelectedRowCount();
+        if (filaEditar >= 0 && numfilas == 1) {
+            String id_cxc_det = String.valueOf(tablecxc_ac.getValueAt(filaEditar, 0));
+            int n = JOptionPane.showConfirmDialog(
+                    null, "Esta seguro de eliminar el registro seleccioando ?",
+                    "Eliga una opcion",
+                    JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION) {
+                try {
+
+                    Connection c = con.conexion();
+
+                    PreparedStatement psos = c.prepareStatement("SELECT *\n"
+                            + "FROM bill_cxc_ac \n"
+                            + "WHERE  id =? ");
+                    psos.setString(1, cxc_id);
+                    ResultSet rsos = psos.executeQuery();
+                    String cedula = "";
+                    while (rsos.next()) {
+                        cedula = rsos.getString("client_id");
+                    }
+
+                    PreparedStatement tips = c.prepareStatement("SELECT *\n"
+                            + "FROM bill_cxc_ac_det \n"
+                            + "WHERE  id =? ");
+                    tips.setString(1, id_cxc_det);
+                    ResultSet tr = tips.executeQuery();
+                    String tipotrans = "";
+                    Double total_net = 0.00;
+                    Double cuota_net = 0.00;
+                    Double saldo_net = 0.00;
+                    while (tr.next()) {
+                        tipotrans = tr.getString("tipotransaccion_cod");
+                        total_net = tr.getDouble("total_neto");
+                        cuota_net = tr.getDouble("cuota_neto");
+                        saldo_net = tr.getDouble("saldo_client");
+                    }
+
+                    /*ACTULIZA PRIMERO LA TABLA CXC_DET*/
+                    PreparedStatement upt_cxc_det = c.prepareStatement("UPDATE bill_cxc_ac_det set estado=0 WHERE id=?");
+                    upt_cxc_det.setString(1, id_cxc_det);
+                    upt_cxc_det.execute();
+
+                    /*--------*/
+
+ /*ACTULIZA PRIMERO LA TABLA CXC_SALDO*/
+                    Double saldo_new = 0.00;
+                    if (tipotrans.equals("1")) {
+                        saldo_new = saldo_net - total_net;
+                    }
+                    if (tipotrans.equals("2")) {
+                        saldo_new = saldo_net + cuota_net;
+                    }
+                    PreparedStatement upt_cxc_sl = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=? WHERE client_id=?");
+                    upt_cxc_sl.setDouble(1, saldo_new);
+                    upt_cxc_sl.setString(2, cedula);
+                    upt_cxc_sl.execute();
+
+                    /*--------*/
+                    llena_tabla(cedula);
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                } finally {
+                    con.desconectar();
+                }
+            } else if (n == JOptionPane.NO_OPTION) {
+                System.out.println("noo");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR AL MENOS UN DATO PARA EDITAR");
+        }
+
+
     }//GEN-LAST:event_btn_anular_pagoActionPerformed
+
+    private void btn_anular_todoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_todoActionPerformed
+        String cxc_id = cxc_id_hidden_ac.getText();
+        int n = JOptionPane.showConfirmDialog(
+                null, "Esta seguro de eliminar todo la CxC?",
+                "Eliga una opcion",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            System.out.println("siii");
+            try {
+
+                Connection c = con.conexion();
+
+                PreparedStatement psos = c.prepareStatement("SELECT *\n"
+                        + "FROM bill_cxc_ac \n"
+                        + "WHERE  id =? ");
+                psos.setString(1, cxc_id);
+                ResultSet rsos = psos.executeQuery();
+                String cedula = "";
+                while (rsos.next()) {
+                    cedula = rsos.getString("client_id");
+                }
+
+                /*ACTULIZA PRIMERO LA TABLA CXC*/
+                PreparedStatement upt_cxc = c.prepareStatement("UPDATE bill_cxc_ac set estado=0 WHERE id=?");
+                upt_cxc.setString(1, cxc_id);
+                upt_cxc.execute();
+
+                /*--------*/
+ /*ACTULIZA PRIMERO LA TABLA CXC_SALDO*/
+                PreparedStatement upt_cxc_sl = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=0 WHERE client_id=?");
+                upt_cxc_sl.setString(1, cedula);
+                upt_cxc_sl.execute();
+
+                /*--------*/
+ /*ACTULIZA PRIMERO LA TABLA CXC_DET*/
+                PreparedStatement upt_cxc_det = c.prepareStatement("UPDATE bill_cxc_ac_det set estado=0 WHERE cxc_id=?");
+                upt_cxc_det.setString(1, cxc_id);
+                upt_cxc_det.execute();
+
+                /*--------*/
+                llena_tabla(cedula);
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                con.desconectar();
+            }
+        } else if (n == JOptionPane.NO_OPTION) {
+            System.out.println("noo");
+        }
+
+
+    }//GEN-LAST:event_btn_anular_todoActionPerformed
     public void limpiar_campor() {
         lb_producto.setText("");
         lb_codigo2.setText("");
@@ -992,7 +1143,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     public static javax.swing.JButton btn_abonar;
     public static javax.swing.JButton btn_agrega;
     public static javax.swing.JButton btn_anular_pago;
-    public static javax.swing.JButton btn_modificar_reg;
+    public static javax.swing.JButton btn_anular_todo;
     public javax.swing.JButton btn_search1;
     public static javax.swing.JButton btn_search2;
     public javax.swing.JButton btn_search5;

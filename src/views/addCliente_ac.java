@@ -406,20 +406,20 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 */
                 
                 PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
-                        + "FROM bill_cx_ac cc\n"
+                        + "FROM bill_cxc_ac cc\n"
                         + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cedula_selec);
                 ResultSet rs = ps.executeQuery();
                 int cxc_id = 0;
                 if (rs.next()) {
                     cxc_id = rs.getInt("id");
-                     cxc_id_hidden_ac.setText(String.valueOf(cxc_id));
+                    cxc_id_hidden_ac.setText(String.valueOf(cxc_id));
                 }
                 System.out.println("---->1111" + cxc_id);
                 PreparedStatement psos = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                         + "FROM bill_cxc_ac_det cc\n"
                         + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
                         + "WHERE  cc.estado = 1 AND cc.client_id = ?\n"
-                        + "AND cc.cxc_id = " + cxc_id);
+                        + "AND cc.cxc_id = ? ");
 
                 psos.setString(1, cedula_selec);
                 psos.setInt(2, cxc_id);
@@ -479,7 +479,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "EL CLIENTE NO CUENTA CON PLAN ACUMULATIVO VIGENTE");
                 } else {
                     txt_abono.setEnabled(true);
-                    btn_modificar_reg.setEnabled(true);
+                    btn_anular_todo.setEnabled(true);
                     btn_anular_pago.setEnabled(true);
                     btn_abonar.setEnabled(true);
                     tablecxc_ac.setModel(modeloTabla_cxc);

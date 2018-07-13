@@ -418,7 +418,7 @@ public class addCliente extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "EL CLIENTE NO TIENE SALDOS PENDIENTES");
                 } else {
                     txt_abono.setEnabled(true);
-                    btn_modificar_reg.setEnabled(true);
+                    btn_anular_todo.setEnabled(true);
                     btn_anular_pago.setEnabled(true);
                     btn_abonar.setEnabled(true);
                 }
