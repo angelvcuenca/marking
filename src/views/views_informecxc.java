@@ -5,14 +5,32 @@
  */
 package views;
 
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -39,6 +57,9 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Valor Abono");
         modeloTabla.addColumn("Saldo Total");
 
+        Calendar c2 = new GregorianCalendar();
+        date_inicio.setCalendar(c2);
+        date_fin.setCalendar(c2);
         //   llena_tabla();
     }
 
@@ -50,8 +71,8 @@ public class views_informecxc extends javax.swing.JInternalFrame {
             Connection c = con.conexion();
             String where_data = "cc.estado = 1";
             if (!"".equals(f_ini) && !"".equals(f_fin)) {
-                where_data += " AND cc.fecha_cobro >= '" + f_ini+"'";
-                where_data += " AND cc.fecha_cobro <='" + f_fin+"'";
+                where_data += " AND cc.fecha_cobro >= '" + f_ini + "'";
+                where_data += " AND cc.fecha_cobro <='" + f_fin + "'";
             }
             if (!"".equals(cedula)) {
                 where_data += " AND cc.client_id =" + cedula;
@@ -62,7 +83,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
                     + "FROM bill_cxc cc \n"
                     + "JOIN billing_cliente cl ON cl.PersonaComercio_cedulaRuc = cc.client_id\n"
                     + "JOIN bill_cxc_saldos sl ON sl.client_id = cc.client_id\n"
-                    + "WHERE "+where_data);
+                    + "WHERE " + where_data);
 
             ResultSet rss = pss.executeQuery();
             int cxc_id = 0;
@@ -134,10 +155,11 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         date_fin = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
+        setTitle("MODULO INFORMES - CUENTAS POR COBRAR");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -153,6 +175,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 153, 0));
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,9 +183,14 @@ public class views_informecxc extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 0));
         jButton2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer (1).png"))); // NOI18N
         jButton2.setText("Imprimir Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 0));
@@ -201,7 +229,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(date_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(37, 37, 37))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -217,7 +245,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,6 +297,68 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         String cedula = txt_cedula.getText();
         llena_tabla(f_ini, f_fin, cedula);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int i = 0;
+        String datos = "";
+        List result = new ArrayList();
+        model_informe_cxc listainforme_cxc;
+        result.clear();
+        
+        Date fecha_ini = date_inicio.getDate();
+        Date fecha_fin = date_fin.getDate();
+        String f_ini = "";
+        String f_fin = "";
+        if (fecha_ini != null) {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            f_ini = formato.format(fecha_ini);
+        }
+
+        if (fecha_fin != null) {
+            SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
+
+            f_fin = formato2.format(fecha_fin);
+        }
+        try {
+            for (i = 0; i < jTable1.getRowCount(); i++) {
+                String cedula = String.valueOf(jTable1.getValueAt(i, 0));
+                String cliente = String.valueOf(jTable1.getValueAt(i, 1));
+                String direccion = String.valueOf(jTable1.getValueAt(i, 2));
+                String telefonos = String.valueOf(jTable1.getValueAt(i, 3));
+                String fecha_emision = String.valueOf(jTable1.getValueAt(i, 4));
+                String valor_total = String.valueOf(jTable1.getValueAt(i, 5));
+                String fecha_ult_abono = String.valueOf(jTable1.getValueAt(i, 6));
+                String valor_abono = String.valueOf(jTable1.getValueAt(i, 7));
+                String saldo_total = String.valueOf(jTable1.getValueAt(i, 8));
+                listainforme_cxc = new model_informe_cxc(cedula, cliente, direccion, telefonos, fecha_emision,valor_total, fecha_ult_abono, valor_abono, saldo_total);
+                result.add(listainforme_cxc);
+
+            }
+
+            Map map = new HashMap();
+            JasperPrint jPrint;
+            JDialog report = new JDialog();
+            report.setSize(900, 700);
+            report.setLocationRelativeTo(null);
+            report.setTitle("INFORME DE CUENTAS POR COBRAR");
+
+            map.put("titulo", "INFORME DE CUENTAS POR COBRAR");
+            map.put("fecha_inicio", f_ini);
+            map.put("fecha_fin", f_fin);
+            Connection c = con.conexion();
+            //JasperReport reporte =  (JasperReport) JRLoader.loadObject("informe_cxc.jasper");
+            //jPrint = JasperFillManager.fillReport(reporte, map,new JRBeanCollectionDataSource(result));
+            jPrint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reports/infor_cxc.jasper"), map, new JRBeanCollectionDataSource(result));
+            JRViewer jv = new JRViewer(jPrint);
+            report.getContentPane().add(jv);
+            report.setVisible(true);
+            //jPrint = JasperFillManager.fillReport(reporte,map,new JRBeanCollectionDataSource(result));
+
+        } catch (JRException ex) {
+            Logger.getLogger(views_informecxc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,9 +24,10 @@ public class Principal extends javax.swing.JFrame {
      */
     usuarios mod;
     conexion_bd con = new conexion_bd();
+
     public Principal() {
         initComponents();
-            this.setDefaultCloseOperation(login.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(login.DO_NOTHING_ON_CLOSE);
     }
 
     public Principal(usuarios mod) {
@@ -100,17 +101,18 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         label_user_registro = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_cxc = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         menu_plan_acumulativo = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         menu_cliente = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         menu_producto = new javax.swing.JMenu();
@@ -134,6 +136,44 @@ public class Principal extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(0, 153, 102));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nova.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+
+        jDesktopPane1.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -147,12 +187,15 @@ public class Principal extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cross-mark-on-a-black-circle-background.png"))); // NOI18N
         jButton1.setText("CERRAR SESION");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/group.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,46 +204,40 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1030, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label_user_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_user_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(85, 85, 85))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(label_user_registro)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_user_registro))
+                    .addComponent(jButton1))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(0, 624, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        menu_cxc.setText("Pagos Saldos");
+        menu_cxc.setBackground(new java.awt.Color(204, 204, 204));
+        menu_cxc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money.png"))); // NOI18N
+        menu_cxc.setText("Cuentas x Cobrar");
         menu_cxc.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jMenuItem1.setText("Nuevo Cxc");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem1.setText("Gestion CxC");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -208,17 +245,17 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_cxc.add(jMenuItem1);
 
-        jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jMenuItem2.setText("Anular Pago");
-        menu_cxc.add(jMenuItem2);
-
         jMenuBar1.add(menu_cxc);
 
+        menu_plan_acumulativo.setBackground(new java.awt.Color(255, 255, 255));
+        menu_plan_acumulativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet.png"))); // NOI18N
         menu_plan_acumulativo.setText("Plan Acumulativo");
         menu_plan_acumulativo.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem9.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jMenuItem9.setText("Nuevo Plan Ac.");
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem9.setText("Gestion Plan Ac.");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -226,17 +263,16 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_plan_acumulativo.add(jMenuItem9);
 
-        jMenuItem10.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jMenuItem10.setText("Reporte Ventas");
-        menu_plan_acumulativo.add(jMenuItem10);
-
         jMenuBar1.add(menu_plan_acumulativo);
 
+        menu_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        menu_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee.png"))); // NOI18N
         menu_cliente.setText("Clientes");
         menu_cliente.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
         jMenuItem3.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem3.setText("Gestionar Clientes");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,11 +283,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_cliente);
 
+        menu_producto.setBackground(new java.awt.Color(255, 255, 255));
+        menu_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/box.png"))); // NOI18N
         menu_producto.setText("Productos");
         menu_producto.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
-        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
         jMenuItem11.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem11.setText("Gestionar Productos");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,12 +301,15 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_producto);
 
-        menu_usuarios.setText("Usuario");
+        menu_usuarios.setBackground(new java.awt.Color(255, 255, 255));
+        menu_usuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employees.png"))); // NOI18N
+        menu_usuarios.setText("Empleados");
         menu_usuarios.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
         jMenuItem12.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jMenuItem12.setText("Gestionar Usuarios");
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem12.setText("Gestionar Empleados");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -276,7 +318,8 @@ public class Principal extends javax.swing.JFrame {
         menu_usuarios.add(jMenuItem12);
 
         jMenuItem5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jMenuItem5.setText("Permisos Usuarios");
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem5.setText("Permisos Empleados");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -286,10 +329,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_usuarios);
 
+        menu_informes.setBackground(new java.awt.Color(255, 255, 255));
+        menu_informes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/analysis.png"))); // NOI18N
         menu_informes.setText("Informes");
         menu_informes.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem7.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem7.setText("Informe CxC");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +345,9 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_informes.add(jMenuItem7);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem8.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem8.setText("Informe Plan Ac.");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +356,9 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_informes.add(jMenuItem8);
 
+        jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jMenuItem15.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem15.setText("Informe Cumpleañeros");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,15 +369,29 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_informes);
 
+        menu_config.setBackground(new java.awt.Color(255, 255, 255));
+        menu_config.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/settings.png"))); // NOI18N
         menu_config.setText("Configuraciones");
         menu_config.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
         jMenuItem13.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem13.setText("Renumerar Plan Ac.");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         menu_config.add(jMenuItem13);
 
         jMenuItem14.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
         jMenuItem14.setText("Respaldar BD");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         menu_config.add(jMenuItem14);
 
         jMenuBar1.add(menu_config);
@@ -337,15 +402,15 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -405,15 +470,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-       views_cumple reguser = new views_cumple();
+        views_cumple reguser = new views_cumple();
         jDesktopPane1.add(reguser);
         reguser.show();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       views_informecxc views = new views_informecxc();
-       jDesktopPane1.add(views);
-       views.show();
+        views_informecxc views = new views_informecxc();
+        jDesktopPane1.add(views);
+        views.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -421,6 +486,18 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.add(plan_ac);
         plan_ac.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        views_renumerar reguser = new views_renumerar();
+        jDesktopPane1.add(reguser);
+        reguser.show();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        views_respaldobd reguser = new views_respaldobd();
+        jDesktopPane1.add(reguser);
+        reguser.show();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,16 +538,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -478,6 +555,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel label_user_registro;
     private javax.swing.JMenu menu_cliente;
     private javax.swing.JMenu menu_config;

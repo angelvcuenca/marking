@@ -18,22 +18,22 @@ public class views_usuarios extends javax.swing.JInternalFrame {
      */
     public views_usuarios() {
         initComponents();
-        rb_activo.setEnabled(false);
-        rb_cedula_ruc.setEnabled(false);
-        rb_inactivo.setEnabled(false);
-        rb_passport.setEnabled(false);
-        txt_RucDniPass.setEnabled(false);
-        txt_apellido_user.setEnabled(false);
-        txt_buscar.setEnabled(false);
-        txt_celular_user.setEnabled(false);
-        txt_clave_usr.setEnabled(false);
-        txt_correo_user.setEnabled(false);
-        txt_id_usuario.setEnabled(false);
-        txt_nombreUser.setEnabled(false);
-        txt_username_user.setEnabled(false);
-        btn_actulizarDatos.setEnabled(false);
-        btn_eliminarDatos.setEnabled(false);
-        cmb_empleado_comedor.setEnabled(false);
+//        rb_activo.setEnabled(false);
+//        rb_cedula_ruc.setEnabled(false);
+//        rb_inactivo.setEnabled(false);
+//        rb_passport.setEnabled(false);
+//        txt_RucDniPass.setEnabled(false);
+//        txt_apellido_user.setEnabled(false);
+//        txt_buscar.setEnabled(false);
+//        txt_celular_user.setEnabled(false);
+//        txt_clave_usr.setEnabled(false);
+//        txt_correo_user.setEnabled(false);
+//        txt_id_usuario.setEnabled(false);
+//        txt_nombreUser.setEnabled(false);
+//        txt_username_user.setEnabled(false);
+//        btn_actulizarDatos.setEnabled(false);
+//        btn_eliminarDatos.setEnabled(false);
+//        cmb_empleado_comedor.setEnabled(false);
     }
 
     /**
@@ -113,7 +113,7 @@ public class views_usuarios extends javax.swing.JInternalFrame {
         btn_listarDatos.setForeground(new java.awt.Color(255, 255, 255));
         btn_listarDatos.setText("Listar");
 
-        btn_ok.setBackground(new java.awt.Color(102, 102, 255));
+        btn_ok.setBackground(new java.awt.Color(153, 255, 255));
         btn_ok.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_ok.setText("Guardar");
         btn_ok.setEnabled(false);
@@ -371,7 +371,7 @@ public class views_usuarios extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 130, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();

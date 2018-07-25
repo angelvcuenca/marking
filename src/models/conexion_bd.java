@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 
 public class conexion_bd {
 
-    Connection conn;
+    //Connection conn;
+    public static Connection conn;
     static Statement st;
     static ResultSet rt;
     public String puerto = "3306";

@@ -167,6 +167,7 @@ public class addProducto extends javax.swing.JInternalFrame {
         btn_search.setBackground(new java.awt.Color(51, 0, 204));
         btn_search.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         btn_search.setText("Buscar Producto");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,6 +248,7 @@ public class addProducto extends javax.swing.JInternalFrame {
         btn_modificar1.setBackground(new java.awt.Color(102, 102, 0));
         btn_modificar1.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_modificar1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_modificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
         btn_modificar1.setText("Agregar Producto");
         btn_modificar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,7 +479,7 @@ public class addProducto extends javax.swing.JInternalFrame {
             btn_agrega.setEnabled(true);
             txt_abono.setEnabled(true);
             btn_anular_todo.setEnabled(true);
-            btn_anular_pago.setEnabled(true);
+           // btn_anular_pago.setEnabled(true);
             btn_abonar.setEnabled(false);
 
 

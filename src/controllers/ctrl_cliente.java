@@ -164,8 +164,10 @@ public class ctrl_cliente implements ActionListener, KeyListener {
                                     //limpiar_data();
                                     list_cliente(RucDniPass_cliente);
                                 } else {
-                                    PreparedStatement se = c.prepareStatement("INSERT INTO billing_cliente(PersonaComercio_cedulaRuc,nombres,apellidos,celular,telefonos,email,direccion,id_nro_poste,telefono2,direccion2,clientetipo_idclientetipo, fecha_nacimiento_cli\n"
-                                            + ",billing_cliente_id,es_pasaporte,tipo_ruc)\n"
+                                    PreparedStatement se = c.prepareStatement("INSERT INTO billing_cliente\n"
+                                            + "(PersonaComercio_cedulaRuc,nombres,apellidos,celular,telefonos,email,direccion,\n"
+                                            + "id_nro_poste,telefono2,direccion2,clientetipo_idclientetipo, fecha_nacimiento_cli,\n"
+                                            + "billing_cliente_id,es_pasaporte,tipo_ruc)\n"
                                             + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                                     se.setString(1, RucDniPass_cliente);
                                     se.setString(2, name_cliente);
@@ -178,10 +180,11 @@ public class ctrl_cliente implements ActionListener, KeyListener {
                                     se.setString(9, fono_trabajo);
                                     se.setString(10, dir_trabajo);
                                     se.setInt(11, 1);
-                                    se.setString(12, "0");
-                                    se.setString(13, aux_dniRucPass);
-                                    se.setInt(14, tipoRuc);
-                                    se.setDate(15, java.sql.Date.valueOf(fe));
+                                    se.setDate(12, java.sql.Date.valueOf(fe));
+                                    se.setInt(13, 0);
+                                    se.setString(14, aux_dniRucPass);
+                                    se.setInt(15, tipoRuc);
+                                    
                                     se.execute();
                                     JOptionPane.showMessageDialog(null, "CLIENTE AGREGADO CORRECTAMENTE", "EXITO", JOptionPane.INFORMATION_MESSAGE);
                                 }

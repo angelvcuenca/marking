@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" mode="Opaque" hAlign="Center" vAlign="Middle" isBold="false">
+		<box>
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="style2" mode="Opaque" hAlign="Center" vAlign="Middle" isBold="false"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="fecha_cumple" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefonos" class="java.lang.String"/>
+	<field name="fecha_nacimiento" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="161" y="11" width="269" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="102" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_cumple}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Elegida:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement style="style1" x="2" y="0" width="69" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="71" y="0" width="131" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="202" y="0" width="118" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="320" y="0" width="73" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[telefonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="393" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha_nacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="493" y="0" width="62" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[edad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement style="style2" x="2" y="0" width="69" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="71" y="1" width="131" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="202" y="1" width="118" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="320" y="1" width="73" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefonos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="393" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="493" y="0" width="62" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

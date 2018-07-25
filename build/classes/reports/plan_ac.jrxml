@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="453" pageHeight="311" orientation="Landscape" columnWidth="413" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" hAlign="Center" vAlign="Middle" fontName="Monospaced" isBold="false">
+		<box>
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="style2" fontSize="9"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="celular" class="java.lang.String"/>
+	<parameter name="nro_funda" class="java.lang.String"/>
+	<field name="nro" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="valor" class="java.lang.String"/>
+	<field name="abono" class="java.lang.String"/>
+	<field name="saldo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="0" width="223" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="63" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="20" width="44" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direc:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="20" width="37" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tfno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="0" width="255" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="20" width="160" height="30"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="20" width="69" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{celular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="20" width="59" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#Paquete:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="20" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nro_funda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement style="style1" x="0" y="2" width="27" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[nro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="27" y="2" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="84" y="2" width="48" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="132" y="2" width="121" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="253" y="2" width="34" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="287" y="2" width="35" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[abono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="322" y="2" width="39" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[saldo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement style="style2" x="0" y="0" width="27" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="84" y="0" width="48" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="132" y="0" width="121" height="32"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="253" y="0" width="34" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="287" y="0" width="35" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{abono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="322" y="0" width="39" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style2" x="27" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="29">
+			<staticText>
+				<reportElement x="10" y="10" width="93" height="19"/>
+				<textElement>
+					<font fontName="Monospaced" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="10" width="100" height="19"/>
+				<textElement>
+					<font fontName="Monospaced" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma Empleado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="10" width="100" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="209" y="10" width="100" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

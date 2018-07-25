@@ -93,6 +93,7 @@ public class addCliente extends javax.swing.JInternalFrame {
         btn_search.setBackground(new java.awt.Color(102, 0, 102));
         btn_search.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         btn_search.setText("Buscar Cliente");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +176,7 @@ public class addCliente extends javax.swing.JInternalFrame {
         btn_modificar.setBackground(new java.awt.Color(102, 102, 0));
         btn_modificar.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
         btn_modificar.setText("Agregar Cliente");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,19 +204,16 @@ public class addCliente extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(search_cbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(search_tabla_comensal)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_modificar)
+                        .addComponent(search_tabla_comensal))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_modificar)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -395,11 +394,28 @@ public class addCliente extends javax.swing.JInternalFrame {
                         est = "ADEUDA";
 
                     }
+                    
+                    String cdo = rss.getString("codigo2");
+                    String aux_cdo=null;
+                    if(cdo==null){
+                       aux_cdo="-";
+                    }else{
+                        aux_cdo=cdo;
+                    }
+                    
+                    String nunico = rss.getString("nombreUnico");
+                    String aux_nunico=null;
+                    
+                    if(nunico==null){
+                        aux_nunico="-";
+                    }else{
+                        aux_nunico=nunico;
+                    }
                     modeloTabla_cxc.addRow(new Object[]{
                         rss.getString("id"),
                         rss.getString("fecha_cobro"),
-                        rss.getString("codigo2"),
-                        rss.getString("nombreUnico"),
+                        aux_cdo,
+                        aux_nunico,
                         rss.getString("total_neto"),
                         rss.getString("cuota_neto"),
                         rss.getString("saldo_client"),
@@ -419,7 +435,7 @@ public class addCliente extends javax.swing.JInternalFrame {
                 } else {
                     txt_abono.setEnabled(true);
                     btn_anular_todo.setEnabled(true);
-                    btn_anular_pago.setEnabled(true);
+                    //btn_anular_pago.setEnabled(true);
                     btn_abonar.setEnabled(true);
                 }
 

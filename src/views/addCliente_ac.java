@@ -93,6 +93,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
         btn_search.setBackground(new java.awt.Color(102, 0, 102));
         btn_search.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         btn_search.setText("Buscar Cliente");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +176,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
         btn_modificar.setBackground(new java.awt.Color(102, 102, 0));
         btn_modificar.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
         btn_modificar.setText("Agregar Cliente");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,11 +444,28 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                         est = "ADEUDA";
 
                     }
+                    String cdo = rsos.getString("codigo2");
+                    String aux_cdo=null;
+                    System.out.println("--> "+cdo);
+                    if(cdo==null){
+                       aux_cdo="-";
+                    }else{
+                        aux_cdo=cdo;
+                    }
+                    
+                    String nunico = rsos.getString("nombreUnico");
+                    String aux_nunico=null;
+                    
+                    if(nunico==null){
+                        aux_nunico="-";
+                    }else{
+                        aux_nunico=nunico;
+                    }
                     modeloTabla_cxc.addRow(new Object[]{
                         rsos.getString("id"),
                         rsos.getString("fecha_cobro"),
-                        rsos.getString("codigo2"),
-                        rsos.getString("nombreUnico"),
+                        aux_cdo,
+                        aux_nunico,
                         rsos.getString("total_neto"),
                         rsos.getString("cuota_neto"),
                         rsos.getString("saldo_client"),
@@ -480,7 +499,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 } else {
                     txt_abono.setEnabled(true);
                     btn_anular_todo.setEnabled(true);
-                    btn_anular_pago.setEnabled(true);
+                    //btn_anular_pago.setEnabled(true);
                     btn_abonar.setEnabled(true);
                     tablecxc_ac.setModel(modeloTabla_cxc);
                 }

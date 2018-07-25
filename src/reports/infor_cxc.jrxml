@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="78"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="fecha_inicio" class="java.lang.String"/>
+	<parameter name="fecha_fin" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefonos" class="java.lang.String"/>
+	<field name="fecha_emision" class="java.lang.String"/>
+	<field name="valor_total" class="java.lang.String"/>
+	<field name="fecha_ult_abono" class="java.lang.String"/>
+	<field name="valor_abono" class="java.lang.String"/>
+	<field name="saldo_total" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="217" y="21" width="468" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="68" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="68" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="0" width="148" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[telefonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha_emision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="516" y="2" width="69" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor_total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="585" y="2" width="76" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha_ult_abono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="674" y="2" width="71" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor_abono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="745" y="0" width="57" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" isBold="true"/>
+				</textElement>
+				<text><![CDATA[saldo_total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="68" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="148" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefonos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_emision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="516" y="0" width="69" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="585" y="0" width="76" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_ult_abono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="674" y="0" width="71" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor_abono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="745" y="0" width="57" height="20"/>
+				<textElement>
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{saldo_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

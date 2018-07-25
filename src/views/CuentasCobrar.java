@@ -11,15 +11,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import models.conexion_bd;
+import models.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
 import static views.PlanAcumulativo.jDateChooser1_ac;
 
 /**
@@ -41,7 +51,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_abonar.setEnabled(false);
         btn_search2.setEnabled(false);
         btn_anular_todo.setEnabled(false);
-        btn_anular_pago.setEnabled(false);
+        //btn_anular_pago.setEnabled(false);
         Calendar c2 = new GregorianCalendar();
         jDateChooser1.setCalendar(c2);
         valor_producto.setEnabled(false);
@@ -69,8 +79,6 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablecxc = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -99,6 +107,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel25 = new javax.swing.JLabel();
         btn_abonar = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablecxc = new javax.swing.JTable();
+        btn_anular_todo = new javax.swing.JButton();
+        btn_search5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lb_producto = new javax.swing.JLabel();
@@ -109,27 +121,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         pvp_con_iva = new javax.swing.JLabel();
         btn_search2 = new javax.swing.JButton();
-        btn_anular_todo = new javax.swing.JButton();
-        btn_anular_pago = new javax.swing.JButton();
-        btn_search5 = new javax.swing.JButton();
 
         setClosable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        tablecxc.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        tablecxc.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "FECHA", "CODIGO", "DESCRIPCION", "VALOR", "ABONO", "SALDO"
-            }
-        ));
-        jScrollPane1.setViewportView(tablecxc);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12), new java.awt.Color(204, 102, 0))); // NOI18N
@@ -172,6 +167,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_search1.setBackground(new java.awt.Color(102, 0, 102));
         btn_search1.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         btn_search1.setText("Buscar Cliente");
         btn_search1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,9 +279,9 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cliente_id_hidden)
                             .addComponent(product_id_hidden)
@@ -307,6 +303,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_agrega.setBackground(new java.awt.Color(0, 102, 255));
         btn_agrega.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_agrega.setForeground(new java.awt.Color(255, 255, 255));
+        btn_agrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
         btn_agrega.setText("Agregar Producto");
         btn_agrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -332,6 +329,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_abonar.setBackground(new java.awt.Color(51, 0, 153));
         btn_abonar.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_abonar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_abonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet (1).png"))); // NOI18N
         btn_abonar.setText("Abonar");
         btn_abonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,39 +337,76 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             }
         });
 
+        tablecxc.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        tablecxc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "FECHA", "CODIGO", "DESCRIPCION", "VALOR", "ABONO", "SALDO"
+            }
+        ));
+        jScrollPane1.setViewportView(tablecxc);
+
+        btn_anular_todo.setBackground(new java.awt.Color(153, 0, 0));
+        btn_anular_todo.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        btn_anular_todo.setForeground(new java.awt.Color(255, 255, 255));
+        btn_anular_todo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/garbage.png"))); // NOI18N
+        btn_anular_todo.setText("Anular CxC");
+        btn_anular_todo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anular_todoActionPerformed(evt);
+            }
+        });
+
+        btn_search5.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        btn_search5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer (1).png"))); // NOI18N
+        btn_search5.setText("Imprimir");
+        btn_search5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_search5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel23)
-                .addGap(18, 18, 18)
-                .addComponent(valor_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel24)
-                .addGap(18, 18, 18)
-                .addComponent(txt_abono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_agrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_abonar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel23)
+                        .addGap(18, 18, 18)
+                        .addComponent(valor_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel24)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_abono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_agrega)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(btn_abonar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btn_search5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_anular_todo)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_agrega)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_abonar)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -379,7 +414,15 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                         .addComponent(valor_producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel24)
                         .addComponent(txt_abono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel25)))
+                        .addComponent(jLabel25)
+                        .addComponent(btn_agrega)
+                        .addComponent(btn_abonar)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_anular_todo)
+                    .addComponent(btn_search5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -425,6 +468,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         btn_search2.setBackground(new java.awt.Color(102, 153, 0));
         btn_search2.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search2.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
         btn_search2.setText("Buscar Producto");
         btn_search2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,9 +493,6 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                         .addComponent(lb_producto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addComponent(btn_search2))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel21)
@@ -460,7 +501,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel19)
                                     .addGap(18, 18, 18)
-                                    .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(btn_search2)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -483,40 +527,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(pvp_con_iva))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_search2)
-                .addContainerGap())
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-
-        btn_anular_todo.setBackground(new java.awt.Color(153, 0, 0));
-        btn_anular_todo.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        btn_anular_todo.setForeground(new java.awt.Color(255, 255, 255));
-        btn_anular_todo.setText("Anular Todo");
-        btn_anular_todo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_anular_todoActionPerformed(evt);
-            }
-        });
-
-        btn_anular_pago.setBackground(new java.awt.Color(51, 0, 102));
-        btn_anular_pago.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        btn_anular_pago.setForeground(new java.awt.Color(255, 255, 255));
-        btn_anular_pago.setText("Anular Registro");
-        btn_anular_pago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_anular_pagoActionPerformed(evt);
-            }
-        });
-
-        btn_search5.setBackground(new java.awt.Color(102, 102, 102));
-        btn_search5.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        btn_search5.setForeground(new java.awt.Color(0, 0, 102));
-        btn_search5.setText("Imprimir");
-        btn_search5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_search5ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -525,37 +539,22 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_search5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_anular_todo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_anular_pago))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(122, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_anular_todo)
-                    .addComponent(btn_anular_pago)
-                    .addComponent(btn_search5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -568,9 +567,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -595,11 +595,11 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
         try {
             Connection c = con.conexion();
-             String id_cxc = cxc_id_hidden.getText();
+            String id_cxc = cxc_id_hidden.getText();
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                     + "FROM bill_cxc_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
@@ -619,7 +619,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 btn_abonar.setEnabled(false);
                 /*ACTULIZA EL SALDO*/
                 //PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,client_id, fecha)\n"
-                  //      + "VALUES(?,?,?)");
+                //      + "VALUES(?,?,?)");
                 PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
                 updteSaldo.setDouble(1, new_saldo);
                 updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
@@ -649,19 +649,17 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 guardarStmt.setDouble(6, 0);
                 guardarStmt.setString(7, cod_user_id);
                 guardarStmt.setString(8, id_cxc);
-                
 
                 guardarStmt.execute();
-                
-                if(new_saldo == 0){
+
+                if (new_saldo == 0) {
                     PreparedStatement updSaldocc = c.prepareStatement("UPDATE bill_cxc set estado=0, total_neto=? where id=?");
                     updSaldocc.setDouble(1, new_saldo);
                     updSaldocc.setString(2, id_cxc);
                     updSaldocc.execute();
                     cxc_id_hidden.setText("0");
                 }
-                
-                
+
                 JOptionPane.showMessageDialog(null, "Abono Registrado Correctamente");
                 llena_tabla(cliente);
 
@@ -731,12 +729,11 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
                 id_cxc = cxc_ide;
             }
-            
 
             PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
                     + "FROM bill_cxc_det cc\n"
                     + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc+"\n"
+                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
                     + "ORDER BY id DESC LIMIT 1");
             ResultSet rss = pss.executeQuery();
             String saldo = null;
@@ -758,31 +755,31 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             } else {
 
                 new_saldo = valor_aux;
-                 PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
+                PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
                         + "FROM bill_cxc_saldos cc\n"
                         + "WHERE cc.client_id =" + cliente);
                 ResultSet ra = ca.executeQuery();
-                int encontro=0;
+                int encontro = 0;
                 if (ra.next()) {
                     encontro = ra.getInt("id");
                 }
-                
-                if(encontro == 0){
+
+                if (encontro == 0) {
                     PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,fecha,client_id)\n"
-                       + "VALUES(?,?,?)");
-                //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
-                updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                updteSaldo.setString(3, cliente);
-                updteSaldo.execute();
-                }else{
-                  //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,fecha,client_id)\n"
+                            + "VALUES(?,?,?)");
+                    //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
+                    updteSaldo.setDouble(1, new_saldo);
+                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                    updteSaldo.setString(3, cliente);
+                    updteSaldo.execute();
+                } else {
+                    //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos(saldo,fecha,client_id)\n"
                     //   + "VALUES(?,?,?)");
-                PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
-                updteSaldo.setDouble(1, new_saldo);
-                updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                updteSaldo.setString(3, cliente);
-                updteSaldo.execute();
+                    PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=?,fecha=? where client_id=?");
+                    updteSaldo.setDouble(1, new_saldo);
+                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                    updteSaldo.setString(3, cliente);
+                    updteSaldo.execute();
                 }
             }
 
@@ -798,7 +795,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                     id_cxc = rcc.getString("id");
                 }*/
                 cxc_id_hidden.setText(id_cxc);
-                
+
                 PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
                 ResultSet r_rol = s_rol.executeQuery();
                 String cod_user_id = null;
@@ -842,13 +839,56 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_agregaActionPerformed
 
     private void btn_search5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search5ActionPerformed
+        int i = 0;
+        String datos = "";
+        List result = new ArrayList();
+        model_cxc_ac list_cxc;
+        result.clear();
         try {
+            for (i = 0; i < tablecxc.getRowCount(); i++) {
+                String nro = String.valueOf(tablecxc.getValueAt(i, 0));
+                String fecha = String.valueOf(tablecxc.getValueAt(i, 1));
+                String codigo = String.valueOf(tablecxc.getValueAt(i, 2));
+                String descripcion = String.valueOf(tablecxc.getValueAt(i, 3));
+                String valor = String.valueOf(tablecxc.getValueAt(i, 4));
+                String abono = String.valueOf(tablecxc.getValueAt(i, 5));
+                String saldo = String.valueOf(tablecxc.getValueAt(i, 6));
+                //String estado = String.valueOf(tablecxc.getValueAt(i, 7));
+                list_cxc = new model_cxc_ac(nro, fecha, codigo, descripcion, valor, abono, saldo);
+                result.add(list_cxc);
+
+            }
+            Map map = new HashMap();
+
+            JasperPrint jPrint;
+            JDialog report = new JDialog();
+            report.setSize(900, 700);
+            report.setLocationRelativeTo(null);
+            report.setTitle("CXC");
+            String client = txt_names.getText();
+            String dir = txt_dirc_casa.getText();
+            String tlf = txt_celular.getText();
+           
+            map.put("titulo", "COMPROBANTE CxC");
+            map.put("cliente", client);
+            map.put("direccion", dir);
+            map.put("celular", tlf);
+            
+            jPrint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reports/cxc.jasper"), map, new JRBeanCollectionDataSource(result));
+            JRViewer jv = new JRViewer(jPrint);
+            report.getContentPane().add(jv);
+            report.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(views_informecxc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*try {
             MessageFormat headerFormat = new MessageFormat("Registro de Saldos");
             MessageFormat fooderFormat = new MessageFormat("Registro de Saldos");
             tablecxc.print(JTable.PrintMode.FIT_WIDTH, headerFormat, fooderFormat);
         } catch (Exception e) {
             Logger.getLogger(CuentasCobrar.class.getName()).log(Level.SEVERE, null, e);
-        }
+        }*/
     }//GEN-LAST:event_btn_search5ActionPerformed
 
     private void btn_anular_todoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_todoActionPerformed
@@ -901,85 +941,6 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             System.out.println("noo");
         }
     }//GEN-LAST:event_btn_anular_todoActionPerformed
-
-    private void btn_anular_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anular_pagoActionPerformed
-        String cxc_id = cxc_id_hidden.getText();
-        int filaEditar = tablecxc.getSelectedRow();
-        int numfilas = tablecxc.getSelectedRowCount();
-        if (filaEditar >= 0 && numfilas == 1) {
-            String id_cxc_det = String.valueOf(tablecxc.getValueAt(filaEditar, 0));
-            int n = JOptionPane.showConfirmDialog(
-                    null, "Esta seguro de eliminar el registro seleccioando ?",
-                    "Eliga una opcion",
-                    JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION) {
-                try {
-
-                    Connection c = con.conexion();
-
-                    PreparedStatement psos = c.prepareStatement("SELECT *\n"
-                            + "FROM bill_cxc \n"
-                            + "WHERE  id =? ");
-                    psos.setString(1, cxc_id);
-                    ResultSet rsos = psos.executeQuery();
-                    String cedula = "";
-                    while (rsos.next()) {
-                        cedula = rsos.getString("client_id");
-                    }
-
-                    PreparedStatement tips = c.prepareStatement("SELECT *\n"
-                            + "FROM bill_cxc_det \n"
-                            + "WHERE  id =? ");
-                    tips.setString(1, id_cxc_det);
-                    ResultSet tr = tips.executeQuery();
-                    String tipotrans = "";
-                    Double total_net = 0.00;
-                    Double cuota_net = 0.00;
-                    Double saldo_net = 0.00;
-                    while (tr.next()) {
-                        tipotrans = tr.getString("tipotransaccion_cod");
-                        total_net = tr.getDouble("total_neto");
-                        cuota_net = tr.getDouble("cuota_neto");
-                        saldo_net = tr.getDouble("saldo_client");
-                    }
-
-                    /*ACTULIZA PRIMERO LA TABLA CXC_DET*/
-                    PreparedStatement upt_cxc_det = c.prepareStatement("UPDATE bill_cxc_det set estado=0 WHERE id=?");
-                    upt_cxc_det.setString(1, id_cxc_det);
-                    upt_cxc_det.execute();
-
-                    /*--------*/
-
- /*ACTULIZA PRIMERO LA TABLA CXC_SALDO*/
-                    Double saldo_new = 0.00;
-                    if (tipotrans.equals("1")) {
-                        saldo_new = saldo_net - total_net;
-                    }
-                    if (tipotrans.equals("2")) {
-                        saldo_new = saldo_net + cuota_net;
-                    }
-                    PreparedStatement upt_cxc_sl = c.prepareStatement("UPDATE bill_cxc_saldos set saldo=? WHERE client_id=?");
-                    upt_cxc_sl.setDouble(1, saldo_new);
-                    upt_cxc_sl.setString(2, cedula);
-                    upt_cxc_sl.execute();
-
-                    /*--------*/
-                    llena_tabla(cedula);
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                } finally {
-                    con.desconectar();
-                }
-            } else if (n == JOptionPane.NO_OPTION) {
-                System.out.println("noo");
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR AL MENOS UN DATO PARA EDITAR");
-        }
-
-
-    }//GEN-LAST:event_btn_anular_pagoActionPerformed
     public void limpiar_campor() {
         lb_producto.setText("");
         lb_codigo2.setText("");
@@ -1025,11 +986,28 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                     est = "ADEUDA";
 
                 }
+                    String cdo = rss.getString("codigo2");
+                    String aux_cdo=null;
+                    System.out.println("--> "+cdo);
+                    if(cdo==null){
+                       aux_cdo="-";
+                    }else{
+                        aux_cdo=cdo;
+                    }
+                    
+                    String nunico = rss.getString("nombreUnico");
+                    String aux_nunico=null;
+                    
+                    if(nunico==null){
+                        aux_nunico="-";
+                    }else{
+                        aux_nunico=nunico;
+                    }
                 modeloTabla_cxc.addRow(new Object[]{
                     rss.getString("id"),
                     rss.getString("fecha_cobro"),
-                    rss.getString("codigo2"),
-                    rss.getString("nombreUnico"),
+                    aux_cdo,
+                    aux_nunico,
                     rss.getString("total_neto"),
                     rss.getString("cuota_neto"),
                     rss.getString("saldo_client"),
@@ -1047,7 +1025,6 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btn_abonar;
     public static javax.swing.JButton btn_agrega;
-    public static javax.swing.JButton btn_anular_pago;
     public static javax.swing.JButton btn_anular_todo;
     public javax.swing.JButton btn_search1;
     public static javax.swing.JButton btn_search2;

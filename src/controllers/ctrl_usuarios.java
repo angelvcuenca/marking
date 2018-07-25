@@ -57,9 +57,13 @@ public class ctrl_usuarios implements ActionListener, KeyListener {
     }
 
      public void llenartabla_horarios() {
-
+        while (modelT.getRowCount() > 0) {
+            modelT.removeRow(0);
+        }
         Connection c = con.conexion();
         try {
+            
+            
             PreparedStatement psa = c.prepareStatement("SELECT * \n"
                     + "FROM billing_empleado \n");
             ResultSet rsa = psa.executeQuery();
