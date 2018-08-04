@@ -72,6 +72,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         modeloTabla_cxc.addColumn("Abono");
         modeloTabla_cxc.addColumn("Saldo");
         modeloTabla_cxc.addColumn("Estado");
+        
+        cliente_id_hidden_ac.setVisible(false);
+        product_id_hidden_ac.setVisible(false);
+        cxc_id_hidden_ac.setVisible(false);
+        funda_id_hidden_ac.setVisible(false);
     }
 
     /**
