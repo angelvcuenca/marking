@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<field name="id" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="num_new" class="java.lang.String"/>
+	<field name="num_old" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="170" y="17" width="277" height="20"/>
+				<textElement>
+					<font fontName="Monospaced" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="41" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="18" width="247" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="18" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<text><![CDATA[Numero Nuevo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="18" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<text><![CDATA[Numero Anterior]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="41" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="0" width="247" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_new}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_old}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

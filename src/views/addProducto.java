@@ -469,7 +469,7 @@ public class addProducto extends javax.swing.JInternalFrame {
             String p_sin_iva = parts[0]; // 123
             String p_con_iva = parts[1];
             pvp_sin_iva.setText(p_sin_iva);
-            pvp_con_iva.setText(p_con_iva);
+//            pvp_con_iva.setText(p_con_iva);
             valor_producto.setText(p_con_iva);
                     
                     

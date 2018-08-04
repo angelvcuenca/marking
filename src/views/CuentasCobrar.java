@@ -118,9 +118,11 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         lb_codigo2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         pvp_sin_iva = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        pvp_con_iva = new javax.swing.JLabel();
         btn_search2 = new javax.swing.JButton();
+        lb_color = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lb_talla = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -432,7 +434,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel15.setText("Nombre Prod.");
+        jLabel15.setText("Marca");
 
         lb_producto.setBackground(new java.awt.Color(0, 0, 0));
         lb_producto.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
@@ -440,7 +442,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel17.setForeground(new java.awt.Color(153, 51, 255));
         jLabel17.setText("Codigo");
 
         lb_codigo2.setBackground(new java.awt.Color(0, 0, 0));
@@ -449,21 +451,12 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel19.setText("PVP (-iva)");
+        jLabel19.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel19.setText("PVP ");
 
         pvp_sin_iva.setBackground(new java.awt.Color(0, 0, 0));
         pvp_sin_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         pvp_sin_iva.setText("-------------");
-
-        jLabel21.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel21.setText("PVP (+iva)");
-
-        pvp_con_iva.setBackground(new java.awt.Color(0, 0, 0));
-        pvp_con_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        pvp_con_iva.setText("-------------");
 
         btn_search2.setBackground(new java.awt.Color(102, 153, 0));
         btn_search2.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
@@ -475,6 +468,24 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 btn_search2ActionPerformed(evt);
             }
         });
+
+        lb_color.setBackground(new java.awt.Color(0, 0, 0));
+        lb_color.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lb_color.setText("-------------");
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel18.setText("Color");
+
+        lb_talla.setBackground(new java.awt.Color(0, 0, 0));
+        lb_talla.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lb_talla.setText("-------------");
+
+        jLabel20.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 153, 102));
+        jLabel20.setText("talla");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -491,21 +502,24 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lb_producto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_color, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel21)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(pvp_con_iva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(69, 69, 69)
-                                .addComponent(btn_search2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(btn_search2))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lb_talla, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -515,19 +529,21 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(lb_producto))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(lb_codigo2))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lb_color))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(pvp_sin_iva))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(pvp_con_iva))
-                .addGap(18, 18, 18)
+                    .addComponent(pvp_sin_iva)
+                    .addComponent(jLabel20)
+                    .addComponent(lb_talla))
+                .addGap(28, 28, 28)
                 .addComponent(btn_search2)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -538,13 +554,13 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -666,7 +682,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 lb_producto.setText("");
                 lb_codigo2.setText("");
                 pvp_sin_iva.setText("");
-                pvp_con_iva.setText("");
+               // pvp_con_iva.setText("");
                 valor_producto.setText("0");
                 txt_abono.setText("0");
                 btn_agrega.setEnabled(false);
@@ -682,7 +698,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_abonarActionPerformed
 
     private void btn_search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search2ActionPerformed
-        addProducto newPanel = new addProducto();
+        producto_new_cc newPanel = new producto_new_cc();
         Principal.jDesktopPane1.add(newPanel);
         newPanel.toFront();
         newPanel.setVisible(true);
@@ -823,7 +839,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                 lb_producto.setText("-------");
                 lb_codigo2.setText("-------");
                 pvp_sin_iva.setText("-------");
-                pvp_con_iva.setText("-------");
+                //pvp_con_iva.setText("-------");
                 valor_producto.setEnabled(false);
                 valor_producto.setText("0");
                 txt_abono.setText("0");
@@ -945,7 +961,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         lb_producto.setText("");
         lb_codigo2.setText("");
         pvp_sin_iva.setText("");
-        pvp_con_iva.setText("");
+       // pvp_con_iva.setText("");
         valor_producto.setText("0");
         txt_abono.setText("0");
         btn_agrega.setEnabled(true);
@@ -1037,8 +1053,9 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1052,9 +1069,10 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lb_codigo2;
+    public static javax.swing.JLabel lb_color;
     public static javax.swing.JLabel lb_producto;
+    public static javax.swing.JLabel lb_talla;
     public static javax.swing.JLabel product_id_hidden;
-    public static javax.swing.JLabel pvp_con_iva;
     public static javax.swing.JLabel pvp_sin_iva;
     public static javax.swing.JTable tablecxc;
     public static javax.swing.JTextField txt_abono;

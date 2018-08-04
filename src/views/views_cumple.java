@@ -67,7 +67,7 @@ public class views_cumple extends javax.swing.JInternalFrame {
         try {
             Connection c = con.conexion();
             PreparedStatement pss = c.prepareStatement("SELECT PersonaComercio_cedulaRuc,CONCAT(nombres,' ',apellidos) cliente,\n"
-                    + "direccion, telefonos,fecha_nacimiento_cli,\n"
+                    + "direccion, telefonos,celular,telefono2,fecha_nacimiento_cli,\n"
                     + "TIMESTAMPDIFF(YEAR,fecha_nacimiento_cli,CURDATE()) AS edad\n"
                     + "FROM billing_cliente\n"
                     + "WHERE DAY (fecha_nacimiento_cli) = DAY ('" + fecha + "')\n"
@@ -75,11 +75,35 @@ public class views_cumple extends javax.swing.JInternalFrame {
 
             ResultSet rss = pss.executeQuery();
             while (rss.next()) {
+                
+                String celular;
+                String telefono2;
+                String telefonos;
+                
+                if(rss.getString("telefonos") == null){
+                    telefonos = "**";
+                }else{
+                    telefonos = rss.getString("telefonos");
+                }
+                /*-------------*/
+                if(rss.getString("celular") == null){
+                    celular = "**";
+                }else{
+                    celular = rss.getString("celular");
+                }
+                /*-------------*/
+                if(rss.getString("telefono2") == null){
+                    telefono2 = "**";
+                }else{
+                    telefono2 = rss.getString("telefono2");
+                }
+                
+                String tlfo = telefonos+"/"+celular+"/"+telefono2;
                 modeloTabla.addRow(new Object[]{
                     rss.getString("PersonaComercio_cedulaRuc"),
                     rss.getString("cliente"),
                     rss.getString("direccion"),
-                    rss.getString("telefonos"),
+                    tlfo,
                     rss.getString("fecha_nacimiento_cli"),
                     rss.getString("edad")
                 });

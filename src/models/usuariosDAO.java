@@ -150,7 +150,7 @@ public class usuariosDAO {
 
             } else {
                 
-                String md = getMD5("A3!1VGDDAifLJSRWI0p?gH:y" + clave);
+                String md = getMD5("novamoda2018@" + clave);
 
                 PreparedStatement guardarStmt = acceso.prepareStatement("INSERT INTO billing_empleado(PersonaComercio_cedulaRuc,username,clave,nombres,apellidos, email, celular, fechaIngreso, observaciones, estaActivo, tipo_almacen) \n"
                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");

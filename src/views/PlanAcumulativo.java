@@ -126,9 +126,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         lb_codigo2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         pvp_sin_iva = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        pvp_con_iva = new javax.swing.JLabel();
         btn_search2 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        lb_color = new javax.swing.JLabel();
+        lb_talla = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("MODULO PLAN ACUMULATIVO");
@@ -257,10 +259,14 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addComponent(product_id_hidden_ac)
                         .addGap(18, 18, 18)
                         .addComponent(cxc_id_hidden_ac)
-                        .addGap(29, 29, 29)
-                        .addComponent(funda_id_hidden_ac)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_search1)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_search1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(funda_id_hidden_ac)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -283,30 +289,28 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                             .addComponent(txt_fono_casa_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_fono_trabajo_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGap(0, 18, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(3, 3, 3))
                     .addComponent(txt_email_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txt_dirc_casa_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(txt_direc_trabajo_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cliente_id_hidden_ac)
                             .addComponent(product_id_hidden_ac)
-                            .addComponent(cxc_id_hidden_ac)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(funda_id_hidden_ac)
-                            .addComponent(btn_search1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(30, 30, 30))
+                            .addComponent(cxc_id_hidden_ac)
+                            .addComponent(funda_id_hidden_ac))
+                        .addGap(31, 37, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_search1)
+                        .addContainerGap())))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -459,7 +463,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel15.setText("Nombre Prod.");
+        jLabel15.setText("Marca");
 
         lb_producto.setBackground(new java.awt.Color(0, 0, 0));
         lb_producto.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
@@ -467,7 +471,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel17.setForeground(new java.awt.Color(51, 153, 0));
         jLabel17.setText("Codigo");
 
         lb_codigo2.setBackground(new java.awt.Color(0, 0, 0));
@@ -477,20 +481,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel19.setText("PVP (-iva)");
+        jLabel19.setText("PVP");
 
         pvp_sin_iva.setBackground(new java.awt.Color(0, 0, 0));
         pvp_sin_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         pvp_sin_iva.setText("-------------");
-
-        jLabel21.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel21.setText("PVP (+iva)");
-
-        pvp_con_iva.setBackground(new java.awt.Color(0, 0, 0));
-        pvp_con_iva.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        pvp_con_iva.setText("-------------");
 
         btn_search2.setBackground(new java.awt.Color(102, 153, 0));
         btn_search2.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
@@ -502,6 +497,24 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 btn_search2ActionPerformed(evt);
             }
         });
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel18.setText("Color");
+
+        lb_color.setBackground(new java.awt.Color(0, 0, 0));
+        lb_color.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lb_color.setText("-------------");
+
+        lb_talla.setBackground(new java.awt.Color(0, 0, 0));
+        lb_talla.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        lb_talla.setText("-------------");
+
+        jLabel20.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 153, 102));
+        jLabel20.setText("talla");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -518,39 +531,45 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lb_producto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(124, 124, 124)
-                            .addComponent(btn_search2))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel19)
-                            .addGap(18, 18, 18)
-                            .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel21)
-                            .addGap(18, 18, 18)
-                            .addComponent(pvp_con_iva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_color, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(btn_search2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_talla, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(pvp_sin_iva, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(lb_producto))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(lb_codigo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lb_color))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(lb_talla)
                     .addComponent(jLabel19)
-                    .addComponent(pvp_sin_iva)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel21)
-                        .addComponent(pvp_con_iva)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pvp_sin_iva))
+                .addGap(18, 18, 18)
                 .addComponent(btn_search2)
                 .addContainerGap())
         );
@@ -594,7 +613,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -736,7 +755,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 lb_producto.setText("");
                 lb_codigo2.setText("");
                 pvp_sin_iva.setText("");
-                pvp_con_iva.setText("");
+//                pvp_con_iva.setText("");
                 valor_producto.setText("0");
                 txt_abono.setText("0");
                 btn_agrega.setEnabled(false);
@@ -752,7 +771,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_abonarActionPerformed
 
     private void btn_search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search2ActionPerformed
-        addProducto_ac newPanel = new addProducto_ac();
+        producto_new newPanel = new producto_new();
         Principal.jDesktopPane1.add(newPanel);
         newPanel.toFront();
         newPanel.setVisible(true);
@@ -917,7 +936,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 lb_producto.setText("-------");
                 lb_codigo2.setText("-------");
                 pvp_sin_iva.setText("-------");
-                pvp_con_iva.setText("-------");
+//                pvp_con_iva.setText("-------");
                 valor_producto.setEnabled(false);
                 valor_producto.setText("0");
                 txt_abono.setText("0");
@@ -1043,7 +1062,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         lb_producto.setText("");
         lb_codigo2.setText("");
         pvp_sin_iva.setText("");
-        pvp_con_iva.setText("");
+//        pvp_con_iva.setText("");
         valor_producto.setText("0");
         txt_abono.setText("0");
         btn_agrega.setEnabled(true);
@@ -1135,8 +1154,9 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1151,9 +1171,10 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lb_codigo2;
+    public static javax.swing.JLabel lb_color;
     public static javax.swing.JLabel lb_producto;
+    public static javax.swing.JLabel lb_talla;
     public static javax.swing.JLabel product_id_hidden_ac;
-    public static javax.swing.JLabel pvp_con_iva;
     public static javax.swing.JLabel pvp_sin_iva;
     public static javax.swing.JTable tablecxc_ac;
     public static javax.swing.JTextField txt_abono;

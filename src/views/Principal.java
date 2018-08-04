@@ -231,13 +231,13 @@ public class Principal extends javax.swing.JFrame {
 
         menu_cxc.setBackground(new java.awt.Color(204, 204, 204));
         menu_cxc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money.png"))); // NOI18N
-        menu_cxc.setText("Cuentas x Cobrar");
+        menu_cxc.setText("Credito Personal");
         menu_cxc.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
-        jMenuItem1.setText("Gestion CxC");
+        jMenuItem1.setText("Gestion Credito");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);

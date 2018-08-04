@@ -9,9 +9,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -51,6 +63,7 @@ public class views_renumerar extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txt_renumerar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -94,12 +107,25 @@ public class views_renumerar extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer (1).png"))); // NOI18N
+        jButton3.setText("Imprimir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -125,7 +151,8 @@ public class views_renumerar extends javax.swing.JInternalFrame {
                         .addComponent(txt_renumerar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jButton3))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,6 +232,42 @@ public class views_renumerar extends javax.swing.JInternalFrame {
                 jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+              int i = 0;
+        String datos = "";
+        List result = new ArrayList();
+        model_renumeracion lista_renu;
+        result.clear();
+        try {
+            for (i = 0; i < jTable1.getRowCount(); i++) {
+                String id = String.valueOf(jTable1.getValueAt(i, 0));
+                String cliente = String.valueOf(jTable1.getValueAt(i, 1));
+                String num_new = String.valueOf(jTable1.getValueAt(i, 2));
+                String num_old = String.valueOf(jTable1.getValueAt(i, 3));
+                lista_renu = new model_renumeracion(id, cliente, num_new, num_old);
+                result.add(lista_renu);
+
+            }
+
+            Map map = new HashMap();
+
+            JasperPrint jPrint;
+            JDialog report = new JDialog();
+            report.setSize(900, 700);
+            report.setLocationRelativeTo(null);
+            report.setTitle("INFORME DE RENUMERACION");
+
+            map.put("titulo", "INFORME DE RENUMERACION");
+           
+            jPrint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reports/renumercion.jasper"), map, new JRBeanCollectionDataSource(result));
+            JRViewer jv = new JRViewer(jPrint);
+            report.getContentPane().add(jv);
+            report.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(views_informecxc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public void llenar_tabla() {
         while (modeloTabla.getRowCount() > 0) {
             modeloTabla.removeRow(0);
@@ -242,6 +305,7 @@ public class views_renumerar extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

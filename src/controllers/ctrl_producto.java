@@ -161,7 +161,7 @@ public class ctrl_producto implements ActionListener, KeyListener {
                                 ses.setString(4, "pA");
                                 ses.execute();
                                 
-                                JOptionPane.showMessageDialog(null, "CLIENTE AGREGADO CORRECTAMENTE", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "PRODUCTO AGREGADO CORRECTAMENTE", "EXITO", JOptionPane.INFORMATION_MESSAGE);
                             }
 
                         }
