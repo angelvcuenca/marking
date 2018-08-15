@@ -367,8 +367,10 @@ public class addCliente extends javax.swing.JInternalFrame {
                         + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cedula_selec);
                 ResultSet rs = ps.executeQuery();
                 int cxc_id = 0;
+                String obser =null;
                 if (rs.next()) {
                     cxc_id = rs.getInt("id");
+                    obser = rs.getString("observaciones");
                      cxc_id_hidden.setText(String.valueOf(cxc_id));
                 }
 
@@ -433,6 +435,7 @@ public class addCliente extends javax.swing.JInternalFrame {
                     txt_abono.setEnabled(false);
                     JOptionPane.showMessageDialog(null, "EL CLIENTE NO TIENE SALDOS PENDIENTES");
                 } else {
+                    txt_observaciones_cc.setText(obser);
                     txt_abono.setEnabled(true);
                     btn_anular_todo.setEnabled(true);
                     //btn_anular_pago.setEnabled(true);

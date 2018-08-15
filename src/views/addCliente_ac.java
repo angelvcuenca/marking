@@ -396,7 +396,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 }
 
                 /*BUSCA EL CLIENTE SI TIENE PLAN ACUMULATIVO*/
-                /*PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
+ /*PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
                         + "FROM bill_cxc_ac cc\n"
                         + "WHERE cc.estado = 1  AND cc.saldo_client =0 AND cc.client_id =" + cedula_selec + "\n"
                         + "ORDER BY id DESC LIMIT 1");
@@ -405,15 +405,16 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
                 while (rs.next()) {
                     id_ultimo = rs.getInt("id");
 
-                */
-                
+                 */
                 PreparedStatement ps = c.prepareStatement("SELECT cc.*\n"
                         + "FROM bill_cxc_ac cc\n"
                         + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cedula_selec);
                 ResultSet rs = ps.executeQuery();
                 int cxc_id = 0;
+                String obser = null;
                 if (rs.next()) {
                     cxc_id = rs.getInt("id");
+                    obser = rs.getString("observaciones");
                     cxc_id_hidden_ac.setText(String.valueOf(cxc_id));
                 }
                 System.out.println("---->1111" + cxc_id);
@@ -429,11 +430,11 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
 
                 String est = null;
                 int info_ac = 0;
-               
+
                 btn_abonar.setEnabled(false);
                 txt_abono.setEnabled(false);
                 while (rsos.next()) {
-                  
+
                     info_ac = rsos.getInt("id");
 
                     Double saldo_estado = rsos.getDouble("saldo_client");
@@ -445,21 +446,21 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
 
                     }
                     String cdo = rsos.getString("codigo2");
-                    String aux_cdo=null;
-                    System.out.println("--> "+cdo);
-                    if(cdo==null){
-                       aux_cdo="-";
-                    }else{
-                        aux_cdo=cdo;
+                    String aux_cdo = null;
+                    System.out.println("--> " + cdo);
+                    if (cdo == null) {
+                        aux_cdo = "-";
+                    } else {
+                        aux_cdo = cdo;
                     }
-                    
+
                     String nunico = rsos.getString("nombreUnico");
-                    String aux_nunico=null;
-                    
-                    if(nunico==null){
-                        aux_nunico="-";
-                    }else{
-                        aux_nunico=nunico;
+                    String aux_nunico = null;
+
+                    if (nunico == null) {
+                        aux_nunico = "-";
+                    } else {
+                        aux_nunico = nunico;
                     }
                     modeloTabla_cxc.addRow(new Object[]{
                         rsos.getString("id"),
@@ -497,6 +498,7 @@ public class addCliente_ac extends javax.swing.JInternalFrame {
 
                     JOptionPane.showMessageDialog(null, "EL CLIENTE NO CUENTA CON PLAN ACUMULATIVO VIGENTE");
                 } else {
+                    txt_observaciones_pac.setText(obser);
                     txt_abono.setEnabled(true);
                     btn_anular_todo.setEnabled(true);
                     //btn_anular_pago.setEnabled(true);

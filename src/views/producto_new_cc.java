@@ -65,7 +65,7 @@ public class producto_new_cc extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel2.setText("Codigo");
+        jLabel2.setText("Cod. Común");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 204));
@@ -177,9 +177,8 @@ public class producto_new_cc extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

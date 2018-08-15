@@ -72,7 +72,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         modeloTabla_cxc.addColumn("Abono");
         modeloTabla_cxc.addColumn("Saldo");
         modeloTabla_cxc.addColumn("Estado");
-        
+
         cliente_id_hidden_ac.setVisible(false);
         product_id_hidden_ac.setVisible(false);
         cxc_id_hidden_ac.setVisible(false);
@@ -124,6 +124,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         tablecxc_ac = new javax.swing.JTable();
         btn_anular_todo = new javax.swing.JButton();
         btn_search5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txt_observaciones_pac = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lb_producto = new javax.swing.JLabel();
@@ -397,6 +399,12 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel2.setText("Observaciones:");
+
+        txt_observaciones_pac.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -427,8 +435,12 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addComponent(btn_abonar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_search5)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_observaciones_pac, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_search5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_anular_todo)))
                 .addContainerGap())
         );
@@ -457,9 +469,13 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_anular_todo)
-                    .addComponent(btn_search5)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_anular_todo)
+                        .addComponent(btn_search5))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txt_observaciones_pac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -477,7 +493,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 153, 0));
-        jLabel17.setText("Codigo");
+        jLabel17.setText("Cod. Común");
 
         lb_codigo2.setBackground(new java.awt.Color(0, 0, 0));
         lb_codigo2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
@@ -496,7 +512,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         btn_search2.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search2.setForeground(new java.awt.Color(255, 255, 255));
         btn_search2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
-        btn_search2.setText("Buscar Producto");
+        btn_search2.setText("Datos del Producto");
         btn_search2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_search2ActionPerformed(evt);
@@ -783,176 +799,182 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_search2ActionPerformed
 
     private void btn_agregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregaActionPerformed
-        int tipo_transaccion = 1;
-        Date fecha = jDateChooser1_ac.getDate();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        if (txt_observaciones_pac.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "POR FAVOR LLENE EL CAMPO OBSERVACIONES");
+        } else {
 
-        String abono_s = txt_abono.getText();
-        String valor_prod = valor_producto.getText();
-        String cliente = cliente_id_hidden_ac.getText();
-        String cod_prdo = product_id_hidden_ac.getText();
+            int tipo_transaccion = 1;
+            Date fecha = jDateChooser1_ac.getDate();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
-        Double abono = Double.parseDouble(abono_s);
-        Double valor_aux = Double.parseDouble(valor_prod);
+            String abono_s = txt_abono.getText();
+            String valor_prod = valor_producto.getText();
+            String cliente = cliente_id_hidden_ac.getText();
+            String cod_prdo = product_id_hidden_ac.getText();
 
-        try {
+            Double abono = Double.parseDouble(abono_s);
+            Double valor_aux = Double.parseDouble(valor_prod);
 
-            Connection c = con.conexion();
-            String cxc_ide = cxc_id_hidden_ac.getText();
-            String id_cxc = "999";
+            try {
 
-            String fe = formato.format(fecha);
-            if (cxc_ide.equals("0")) {
+                Connection c = con.conexion();
+                String cxc_ide = cxc_id_hidden_ac.getText();
+                String id_cxc = "999";
 
-                PreparedStatement newcc = c.prepareStatement("INSERT INTO bill_cxc_ac(fecha_cobro, client_id, total_neto)\n"
-                        + "VALUES(?,?,?)");
-                newcc.setDate(1, java.sql.Date.valueOf(fe));
-                newcc.setString(2, cliente);
-                newcc.setDouble(3, valor_aux);
-                newcc.execute();
+                String fe = formato.format(fecha);
+                if (cxc_ide.equals("0")) {
 
-                PreparedStatement pscc = c.prepareStatement("SELECT cc.*\n"
-                        + "FROM bill_cxc_ac cc\n"
-                        + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cliente + "\n"
+                    PreparedStatement newcc = c.prepareStatement("INSERT INTO bill_cxc_ac(fecha_cobro, client_id, total_neto,observaciones)\n"
+                            + "VALUES(?,?,?,?)");
+                    newcc.setDate(1, java.sql.Date.valueOf(fe));
+                    newcc.setString(2, cliente);
+                    newcc.setDouble(3, valor_aux);
+                    newcc.setString(4, txt_observaciones_pac.getText());
+                    newcc.execute();
+
+                    PreparedStatement pscc = c.prepareStatement("SELECT cc.*\n"
+                            + "FROM bill_cxc_ac cc\n"
+                            + "WHERE cc.estado = 1 AND cc.total_neto > 0 AND cc.client_id =" + cliente + "\n"
+                            + "ORDER BY id DESC LIMIT 1");
+                    ResultSet rscc = pscc.executeQuery();
+                    if (rscc.next()) {
+                        id_cxc = rscc.getString("id");
+                    }
+                } else {
+
+                    id_cxc = cxc_ide;
+                }
+
+                PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
+                        + "FROM bill_cxc_ac_det cc\n"
+                        + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
+                        + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
                         + "ORDER BY id DESC LIMIT 1");
-                ResultSet rscc = pscc.executeQuery();
-                if (rscc.next()) {
-                    id_cxc = rscc.getString("id");
-                }
-            } else {
+                ResultSet rss = pss.executeQuery();
+                String saldo = null;
+                Double saldo_new;
+                Double new_saldo = null;
+                Double aux_new = null;
 
-                id_cxc = cxc_ide;
-            }
+                if (rss.next()) {
+                    saldo = rss.getString("saldo_client");
+                    saldo_new = Double.parseDouble(saldo);
+                    new_saldo = (saldo_new + valor_aux) - abono;
 
-            PreparedStatement pss = c.prepareStatement("SELECT cc.*, p.nombreUnico, p.codigo2\n"
-                    + "FROM bill_cxc_ac_det cc\n"
-                    + "LEFT JOIN billing_producto p ON p.codigo = cc.doc_id\n"
-                    + "WHERE cc.estado = 1 AND cc.client_id =" + cliente + " AND cc.cxc_id =" + id_cxc + "\n"
-                    + "ORDER BY id DESC LIMIT 1");
-            ResultSet rss = pss.executeQuery();
-            String saldo = null;
-            Double saldo_new;
-            Double new_saldo = null;
-            Double aux_new = null;
-
-            if (rss.next()) {
-                saldo = rss.getString("saldo_client");
-                saldo_new = Double.parseDouble(saldo);
-                new_saldo = (saldo_new + valor_aux) - abono;
-
-                PreparedStatement updSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
-                updSaldo.setDouble(1, new_saldo);
-                updSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                updSaldo.setString(3, cliente);
-                updSaldo.execute();
-
-            } else {
-
-                new_saldo = valor_aux;
-                PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
-                        + "FROM bill_cxc_saldos_ac cc\n"
-                        + "WHERE cc.client_id =" + cliente);
-                ResultSet ra = ca.executeQuery();
-                int encontro = 0;
-                if (ra.next()) {
-                    encontro = ra.getInt("id");
-                }
-
-                if (encontro == 0) {
-                    PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
-                            + "VALUES(?,?,?)");
-                    //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
-                    updteSaldo.setDouble(1, new_saldo);
-                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                    updteSaldo.setString(3, cliente);
-                    updteSaldo.execute();
-                } else {
-                    //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
-                    //   + "VALUES(?,?,?)");
-                    PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
-                    updteSaldo.setDouble(1, new_saldo);
-                    updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
-                    updteSaldo.setString(3, cliente);
-                    updteSaldo.execute();
-                }
-
-            }
-
-            if (new_saldo < 0) {
-                JOptionPane.showMessageDialog(null, "NO SE REALIZO EL PROCESO\n EL SALDO QUEDARA EN NEGATIVO");
-            } else {
-                cxc_id_hidden_ac.setText(id_cxc);
-                PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
-                ResultSet r_rol = s_rol.executeQuery();
-                String cod_user_id = null;
-                while (r_rol.next()) {
-                    cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
-                }
-
-                PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id,cxc_id)\n"
-                        + "VALUES(?,?,?,?,?,?,?,?,?)");
-                guardarStmt.setInt(1, tipo_transaccion);
-                guardarStmt.setDouble(2, abono);
-                guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
-                guardarStmt.setString(4, cliente);
-                guardarStmt.setDouble(5, new_saldo);
-                guardarStmt.setDouble(6, valor_aux);
-                guardarStmt.setString(7, cod_prdo);
-                guardarStmt.setString(8, cod_user_id);
-                guardarStmt.setString(9, id_cxc);
-                guardarStmt.execute();
-
-                /*GUARDA EL NUMERO DE FUNDA*/
-                int num_fun_new = 0;
-                String f_new = txt_nro_funda.getText();
-                num_fun_new = Integer.parseInt(f_new);
-
-                PreparedStatement psos = c.prepareStatement("SELECT *\n"
-                        + "FROM bill_funda_acumulativo \n"
-                        + "WHERE  cliente_dni =? AND num_funda =?");
-
-                psos.setString(1, cliente);
-                psos.setInt(2, num_fun_new);
-
-                ResultSet rsos = psos.executeQuery();
-                if (rsos.next()) {
-                    System.out.println("actuliza");
-                    PreparedStatement updfunda = c.prepareStatement("UPDATE bill_funda_acumulativo set num_funda=?,cliente_dni=? where num_funda=?");
-                    updfunda.setInt(1, num_fun_new);
-                    updfunda.setString(2, cliente);
-                    updfunda.setInt(3, num_fun_new);
-                    updfunda.execute();
+                    PreparedStatement updSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                    updSaldo.setDouble(1, new_saldo);
+                    updSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                    updSaldo.setString(3, cliente);
+                    updSaldo.execute();
 
                 } else {
-                    System.out.println("nuevo");
-                    PreparedStatement guardarStmt_fun = c.prepareStatement("INSERT INTO bill_funda_acumulativo(num_funda, cliente_dni)\n"
-                            + "VALUES(?,?)");
-                    guardarStmt_fun.setInt(1, num_fun_new);
-                    guardarStmt_fun.setString(2, cliente);
 
-                    guardarStmt_fun.execute();
+                    new_saldo = valor_aux;
+                    PreparedStatement ca = c.prepareStatement("SELECT cc.*\n"
+                            + "FROM bill_cxc_saldos_ac cc\n"
+                            + "WHERE cc.client_id =" + cliente);
+                    ResultSet ra = ca.executeQuery();
+                    int encontro = 0;
+                    if (ra.next()) {
+                        encontro = ra.getInt("id");
+                    }
+
+                    if (encontro == 0) {
+                        PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
+                                + "VALUES(?,?,?)");
+                        //PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                        updteSaldo.setDouble(1, new_saldo);
+                        updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                        updteSaldo.setString(3, cliente);
+                        updteSaldo.execute();
+                    } else {
+                        //  PreparedStatement updteSaldo = c.prepareStatement("INSERT INTO bill_cxc_saldos_ac(saldo,fecha,client_id)\n"
+                        //   + "VALUES(?,?,?)");
+                        PreparedStatement updteSaldo = c.prepareStatement("UPDATE bill_cxc_saldos_ac set saldo=?,fecha=? where client_id=?");
+                        updteSaldo.setDouble(1, new_saldo);
+                        updteSaldo.setDate(2, java.sql.Date.valueOf(fe));
+                        updteSaldo.setString(3, cliente);
+                        updteSaldo.execute();
+                    }
 
                 }
 
-                /*--------------------*/
-                JOptionPane.showMessageDialog(null, "Producto Registrado Correctamente");
-                llena_tabla(cliente);
+                if (new_saldo < 0) {
+                    JOptionPane.showMessageDialog(null, "NO SE REALIZO EL PROCESO\n EL SALDO QUEDARA EN NEGATIVO");
+                } else {
+                    cxc_id_hidden_ac.setText(id_cxc);
+                    PreparedStatement s_rol = c.prepareStatement("select id_user from cat_historial_sesiones  order by id desc limit 1");
+                    ResultSet r_rol = s_rol.executeQuery();
+                    String cod_user_id = null;
+                    while (r_rol.next()) {
+                        cod_user_id = r_rol.getString("id_user"); // USUARIO ID .. TIPOPAGO ID
+                    }
 
-                lb_producto.setText("-------");
-                lb_codigo2.setText("-------");
-                pvp_sin_iva.setText("-------");
+                    PreparedStatement guardarStmt = c.prepareStatement("INSERT INTO bill_cxc_ac_det(tipotransaccion_cod,cuota_neto, fecha_cobro, client_id, saldo_client,total_neto, doc_id, tipopago_id,cxc_id)\n"
+                            + "VALUES(?,?,?,?,?,?,?,?,?)");
+                    guardarStmt.setInt(1, tipo_transaccion);
+                    guardarStmt.setDouble(2, abono);
+                    guardarStmt.setDate(3, java.sql.Date.valueOf(fe));
+                    guardarStmt.setString(4, cliente);
+                    guardarStmt.setDouble(5, new_saldo);
+                    guardarStmt.setDouble(6, valor_aux);
+                    guardarStmt.setString(7, cod_prdo);
+                    guardarStmt.setString(8, cod_user_id);
+                    guardarStmt.setString(9, id_cxc);
+                    guardarStmt.execute();
+
+                    /*GUARDA EL NUMERO DE FUNDA*/
+                    int num_fun_new = 0;
+                    String f_new = txt_nro_funda.getText();
+                    num_fun_new = Integer.parseInt(f_new);
+
+                    PreparedStatement psos = c.prepareStatement("SELECT *\n"
+                            + "FROM bill_funda_acumulativo \n"
+                            + "WHERE  cliente_dni =? AND num_funda =?");
+
+                    psos.setString(1, cliente);
+                    psos.setInt(2, num_fun_new);
+
+                    ResultSet rsos = psos.executeQuery();
+                    if (rsos.next()) {
+                        System.out.println("actuliza");
+                        PreparedStatement updfunda = c.prepareStatement("UPDATE bill_funda_acumulativo set num_funda=?,cliente_dni=? where num_funda=?");
+                        updfunda.setInt(1, num_fun_new);
+                        updfunda.setString(2, cliente);
+                        updfunda.setInt(3, num_fun_new);
+                        updfunda.execute();
+
+                    } else {
+                        System.out.println("nuevo");
+                        PreparedStatement guardarStmt_fun = c.prepareStatement("INSERT INTO bill_funda_acumulativo(num_funda, cliente_dni)\n"
+                                + "VALUES(?,?)");
+                        guardarStmt_fun.setInt(1, num_fun_new);
+                        guardarStmt_fun.setString(2, cliente);
+
+                        guardarStmt_fun.execute();
+
+                    }
+
+                    /*--------------------*/
+                    JOptionPane.showMessageDialog(null, "Producto Registrado Correctamente");
+                    llena_tabla(cliente);
+
+                    lb_producto.setText("-------");
+                    lb_codigo2.setText("-------");
+                    pvp_sin_iva.setText("-------");
 //                pvp_con_iva.setText("-------");
-                valor_producto.setEnabled(false);
-                valor_producto.setText("0");
-                txt_abono.setText("0");
-                btn_agrega.setEnabled(false);
-                btn_abonar.setEnabled(true);
-            }
+                    valor_producto.setEnabled(false);
+                    valor_producto.setText("0");
+                    txt_abono.setText("0");
+                    btn_agrega.setEnabled(false);
+                    btn_abonar.setEnabled(true);
+                }
 
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            con.desconectar();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                con.desconectar();
+            }
         }
     }//GEN-LAST:event_btn_agregaActionPerformed
 
@@ -971,7 +993,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                 String valor = String.valueOf(tablecxc_ac.getValueAt(i, 4));
                 String abono = String.valueOf(tablecxc_ac.getValueAt(i, 5));
                 String saldo = String.valueOf(tablecxc_ac.getValueAt(i, 6));
-               // String estado = String.valueOf(tablecxc_ac.getValueAt(i, 7));
+                // String estado = String.valueOf(tablecxc_ac.getValueAt(i, 7));
                 list_cxc = new model_cxc_ac(nro, fecha, codigo, descripcion, valor, abono, saldo);
                 result.add(list_cxc);
 
@@ -987,13 +1009,14 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             String dir = txt_dirc_casa_ac.getText();
             String tlf = txt_celular_ac.getText();
             String nro_funda = txt_nro_funda.getText();
-           
+            String obser = txt_observaciones_pac.getText();
             map.put("titulo", "COMPROBANTE PLAN ACUMULATIVO");
             map.put("cliente", client);
             map.put("direccion", dir);
             map.put("celular", tlf);
             map.put("nro_funda", nro_funda);
-            
+            map.put("observacion", obser);
+
             jPrint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reports/plan_ac.jasper"), map, new JRBeanCollectionDataSource(result));
             JRViewer jv = new JRViewer(jPrint);
             report.getContentPane().add(jv);
@@ -1108,22 +1131,22 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     est = "ADEUDA";
 
                 }
-                   String cdo = rss.getString("codigo2");
-                    String aux_cdo=null;
-                    if(cdo==null){
-                       aux_cdo="-";
-                    }else{
-                        aux_cdo=cdo;
-                    }
-                    
-                    String nunico = rss.getString("nombreUnico");
-                    String aux_nunico=null;
-                    System.out.println("--> "+nunico);
-                    if(nunico==null){
-                        aux_nunico="-";
-                    }else{
-                        aux_nunico=nunico;
-                    }
+                String cdo = rss.getString("codigo2");
+                String aux_cdo = null;
+                if (cdo == null) {
+                    aux_cdo = "-";
+                } else {
+                    aux_cdo = cdo;
+                }
+
+                String nunico = rss.getString("nombreUnico");
+                String aux_nunico = null;
+                System.out.println("--> " + nunico);
+                if (nunico == null) {
+                    aux_nunico = "-";
+                } else {
+                    aux_nunico = nunico;
+                }
                 modeloTabla_cxc.addRow(new Object[]{
                     rss.getString("id"),
                     rss.getString("fecha_cobro"),
@@ -1161,6 +1184,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1191,6 +1215,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txt_fono_trabajo_ac;
     public static javax.swing.JTextField txt_names_ac;
     public static javax.swing.JTextField txt_nro_funda;
+    public static javax.swing.JTextField txt_observaciones_pac;
     public static javax.swing.JTextField valor_producto;
     // End of variables declaration//GEN-END:variables
 }

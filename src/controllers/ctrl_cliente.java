@@ -99,7 +99,7 @@ public class ctrl_cliente implements ActionListener, KeyListener {
                 String dir_trabajo = vista.txt_dir_trabajo.getText();
                 Date fecha = vista.date_fechanacimiento.getDate();
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                 String fe = formato.format(fecha);
+                String fe = formato.format(fecha);
                 if (RucDniPass_cliente.equals("")
                         || apellido_cliente.equals("")
                         //|| celular_cliente.equals("")

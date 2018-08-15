@@ -75,7 +75,7 @@ public class views_informe_planac extends javax.swing.JInternalFrame {
             }
 
             PreparedStatement pss = c.prepareStatement("SELECT cc.id idcxc,cc.client_id, CONCAT(cl.nombres,' ',cl.apellidos) cliente, cl.direccion, cl.telefonos,\n"
-                    + "cc.fecha_cobro fecha_reg, sl.saldo saldo_total\n"
+                    + "cl.celular,cl.telefono2,cc.fecha_cobro fecha_reg, sl.saldo saldo_total\n"
                     + "FROM bill_cxc_ac cc \n"
                     + "JOIN billing_cliente cl ON cl.PersonaComercio_cedulaRuc = cc.client_id\n"
                     + "JOIN bill_cxc_saldos_ac sl ON sl.client_id = cc.client_id\n"
@@ -104,12 +104,34 @@ public class views_informe_planac extends javax.swing.JInternalFrame {
                     fecha_ult_abono = rab.getString("fecha_cobro");
 
                 }
+                 String celular;
+                String telefono2;
+                String telefonos;
+                
+                if(rss.getString("telefonos") == null){
+                    telefonos = "**";
+                }else{
+                    telefonos = rss.getString("telefonos");
+                }
+                /*-------------*/
+                if(rss.getString("celular") == null){
+                    celular = "**";
+                }else{
+                    celular = rss.getString("celular");
+                }
+                /*-------------*/
+                if(rss.getString("telefono2") == null){
+                    telefono2 = "**";
+                }else{
+                    telefono2 = rss.getString("telefono2");
+                }
+                String tlfo = telefonos+"/"+celular+"/"+telefono2;
 
                 modeloTabla.addRow(new Object[]{
                     rss.getString("client_id"),
                     rss.getString("cliente"),
                     rss.getString("direccion"),
-                    rss.getString("telefonos"),
+                    tlfo,
                     rss.getString("fecha_reg"),
                     total,
                     fecha_ult_abono,

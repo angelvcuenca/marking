@@ -29,7 +29,7 @@
 			<textField>
 				<reportElement x="161" y="11" width="269" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" size="14" isBold="true"/>
+					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
 			</textField>
@@ -40,14 +40,14 @@
 			<textField>
 				<reportElement x="102" y="0" width="100" height="20"/>
 				<textElement>
-					<font fontName="Monospaced"/>
+					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_cumple}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="2" y="0" width="100" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Elegida:]]></text>
 			</staticText>
@@ -58,42 +58,42 @@
 			<staticText>
 				<reportElement style="style1" x="2" y="0" width="69" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[cedula]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="71" y="0" width="131" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[cliente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="202" y="0" width="118" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[direccion]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="320" y="0" width="102" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[telefonos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="422" y="0" width="100" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[F.Nacimiento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="522" y="0" width="33" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[edad]]></text>
 			</staticText>
@@ -104,42 +104,42 @@
 			<textField>
 				<reportElement style="style2" x="2" y="0" width="69" height="20"/>
 				<textElement textAlignment="Left">
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="71" y="1" width="131" height="38"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="202" y="1" width="118" height="30"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="320" y="1" width="102" height="30"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefonos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="422" y="0" width="100" height="39"/>
 				<textElement>
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="522" y="0" width="33" height="20"/>
 				<textElement>
-					<font fontName="Monospaced" size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{edad}]]></textFieldExpression>
 			</textField>

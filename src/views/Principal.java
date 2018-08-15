@@ -111,6 +111,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_cxc = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menu_cxc1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         menu_plan_acumulativo = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         menu_cliente = new javax.swing.JMenu();
@@ -246,6 +251,53 @@ public class Principal extends javax.swing.JFrame {
         menu_cxc.add(jMenuItem1);
 
         jMenuBar1.add(menu_cxc);
+
+        menu_cxc1.setBackground(new java.awt.Color(204, 204, 204));
+        menu_cxc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money.png"))); // NOI18N
+        menu_cxc1.setText("Credito Institucional");
+        menu_cxc1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+
+        jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem2.setText("Credito Institucional");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menu_cxc1.add(jMenuItem2);
+
+        jMenuItem6.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem6.setText("Gestion Institucion");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menu_cxc1.add(jMenuItem6);
+
+        jMenuItem10.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem10.setText("Informe Institucional");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        menu_cxc1.add(jMenuItem10);
+
+        jMenuItem16.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
+        jMenuItem16.setText("Expor. Emple. Institucional");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        menu_cxc1.add(jMenuItem16);
+
+        jMenuBar1.add(menu_cxc1);
 
         menu_plan_acumulativo.setBackground(new java.awt.Color(255, 255, 255));
         menu_plan_acumulativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet.png"))); // NOI18N
@@ -499,6 +551,24 @@ public class Principal extends javax.swing.JFrame {
         reguser.show();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        add_institucional reguser = new add_institucional();
+        jDesktopPane1.add(reguser);
+        reguser.show();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -543,14 +613,18 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -560,6 +634,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_cliente;
     private javax.swing.JMenu menu_config;
     private javax.swing.JMenu menu_cxc;
+    private javax.swing.JMenu menu_cxc1;
     private javax.swing.JMenu menu_informes;
     private javax.swing.JMenu menu_plan_acumulativo;
     private javax.swing.JMenu menu_producto;
