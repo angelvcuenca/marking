@@ -51,8 +51,8 @@ public class views_cumple extends javax.swing.JInternalFrame {
 
         modeloTabla.addColumn("Cedula");
         modeloTabla.addColumn("Cliente");
-        modeloTabla.addColumn("Direccion");
-        modeloTabla.addColumn("Telefonos");
+        modeloTabla.addColumn("Dirección");
+        modeloTabla.addColumn("Teléfonos");
         modeloTabla.addColumn("Fecha Nacimiento");
         modeloTabla.addColumn("Edad");
 
@@ -285,7 +285,7 @@ public class views_cumple extends javax.swing.JInternalFrame {
             report.setLocationRelativeTo(null);
             report.setTitle("INFORME CUMPLEAÑEROS");
 
-            map.put("titulo", "INFORME CUMPLEAÑEROS");
+            map.put("titulo", "INFORME DE CUMPLEAÑEROS -CALZADO NOVAMODA");
             map.put("fecha_cumple", f_cumple);
             jPrint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("reports/infor_cumples.jasper"), map, new JRBeanCollectionDataSource(result));
             JRViewer jv = new JRViewer(jPrint);

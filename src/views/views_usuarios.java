@@ -107,6 +107,11 @@ public class views_usuarios extends javax.swing.JInternalFrame {
         btn_newDato.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_newDato.setForeground(new java.awt.Color(255, 255, 255));
         btn_newDato.setText("Nuevo");
+        btn_newDato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_newDatoActionPerformed(evt);
+            }
+        });
 
         btn_listarDatos.setBackground(new java.awt.Color(51, 102, 0));
         btn_listarDatos.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
@@ -228,7 +233,7 @@ public class views_usuarios extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         jLabel13.setText("Almacen");
 
-        cmb_empleado_comedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sucursal", "Principal" }));
+        cmb_empleado_comedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sucursal_1", "Sucursal_2", "Sucursal_3", "Sucursal_4", "Sucursal_5", "Principal" }));
 
         javax.swing.GroupLayout panelhoraLayout = new javax.swing.GroupLayout(panelhora);
         panelhora.setLayout(panelhoraLayout);
@@ -294,9 +299,10 @@ public class views_usuarios extends javax.swing.JInternalFrame {
                             .addComponent(txt_apellido_user)
                             .addComponent(txt_correo_user)
                             .addGroup(panelhoraLayout.createSequentialGroup()
-                                .addComponent(txt_id_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cmb_empleado_comedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panelhoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_id_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_empleado_comedor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
@@ -376,6 +382,10 @@ public class views_usuarios extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_newDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newDatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_newDatoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

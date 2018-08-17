@@ -49,8 +49,8 @@ public class views_informecxc extends javax.swing.JInternalFrame {
 
         modeloTabla.addColumn("Cedula");
         modeloTabla.addColumn("Cliente");
-        modeloTabla.addColumn("Direccion");
-        modeloTabla.addColumn("Telefonos");
+        modeloTabla.addColumn("Dirección");
+        modeloTabla.addColumn("Teléfonos");
         modeloTabla.addColumn("Fecha Emision");
         modeloTabla.addColumn("Valor Total");
         modeloTabla.addColumn("Fecha ult. Abono");
@@ -168,7 +168,6 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_cedula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -180,6 +179,7 @@ public class views_informecxc extends javax.swing.JInternalFrame {
         setTitle("MODULO INFORMES - CUENTAS POR COBRAR");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INFORME CREDITO PERSONAL - CALZADO NOVAMODA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 18), new java.awt.Color(0, 51, 204))); // NOI18N
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -214,10 +214,6 @@ public class views_informecxc extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 153, 0));
-        jLabel1.setText("INFORME DE CUENTAS POR COBRAR");
-
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel2.setText("CEDULA/PASS DEL CLIENTE");
 
@@ -251,24 +247,18 @@ public class views_informecxc extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(date_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(37, 37, 37))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(941, Short.MAX_VALUE)
+                .addContainerGap(929, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(278, 278, 278)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -361,9 +351,9 @@ public class views_informecxc extends javax.swing.JInternalFrame {
             JDialog report = new JDialog();
             report.setSize(900, 700);
             report.setLocationRelativeTo(null);
-            report.setTitle("INFORME DE CUENTAS POR COBRAR");
+            report.setTitle("INFORME DE CREDITO PERSONAL");
 
-            map.put("titulo", "INFORME DE CUENTAS POR COBRAR");
+            map.put("titulo", "INFORME DE CREDITO PERSONAL - CALZADO NOVAMODA");
             map.put("fecha_inicio", f_ini);
             map.put("fecha_fin", f_fin);
             Connection c = con.conexion();
@@ -387,7 +377,6 @@ public class views_informecxc extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser date_inicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

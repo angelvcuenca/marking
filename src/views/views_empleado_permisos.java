@@ -27,6 +27,8 @@ public class views_empleado_permisos extends javax.swing.JInternalFrame {
     public views_empleado_permisos() {
         initComponents();
         filial.listar_usuario(comb_filial);
+        btn_newDato.setEnabled(false);
+        btn_eliminar.setEnabled(false);
         
     }
 
@@ -72,13 +74,14 @@ public class views_empleado_permisos extends javax.swing.JInternalFrame {
 
         tablaRoles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Vista CxC"},
-                {"2", "Vista Plan Acumulativo"},
-                {"3", "Vista Productos"},
-                {"4", "Vista Cliente"},
-                {"5", "Vista Usuarios"},
-                {"6", "Vista Informes"},
-                {"7", "Vista Configuraciones"}
+                {"1", "Vista Credito Personal"},
+                {"2", "Vista Credito Institucional"},
+                {"3", "Vista Plan Acumulativo"},
+                {"4", "Vista Productos"},
+                {"5", "Vista Cliente"},
+                {"6", "Vista Usuarios"},
+                {"7", "Vista Informes"},
+                {"8", "Vista Configuraciones"}
             },
             new String [] {
                 "Nro Permiso", "Permisos"

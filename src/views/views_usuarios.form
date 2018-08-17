@@ -147,11 +147,13 @@
                               <Component id="txt_clave_usr" max="32767" attributes="0"/>
                               <Component id="txt_apellido_user" max="32767" attributes="0"/>
                               <Component id="txt_correo_user" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txt_id_usuario" min="-2" pref="87" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txt_id_usuario" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="cmb_empleado_comedor" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="cmb_empleado_comedor" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -323,6 +325,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_newDatoActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -660,9 +665,13 @@
         <Component class="javax.swing.JComboBox" name="cmb_empleado_comedor">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Sucursal"/>
-                <StringItem index="1" value="Principal"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Sucursal_1"/>
+                <StringItem index="1" value="Sucursal_2"/>
+                <StringItem index="2" value="Sucursal_3"/>
+                <StringItem index="3" value="Sucursal_4"/>
+                <StringItem index="4" value="Sucursal_5"/>
+                <StringItem index="5" value="Principal"/>
               </StringArray>
             </Property>
           </Properties>

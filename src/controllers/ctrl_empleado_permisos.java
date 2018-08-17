@@ -81,6 +81,8 @@ public class ctrl_empleado_permisos implements ActionListener, KeyListener {
             String name_filial = modela.getNombres();
             vista.label_filial.setText(name_filial);
             llenartabla_departa_filial(vista.tabla_resultado, id_filial);
+            vista.btn_newDato.setEnabled(true);
+            vista.btn_eliminar.setEnabled(true);
            // llenartabla_departa(vista.tablaRoles);
      
         }

@@ -164,9 +164,22 @@ public class ctrl_usuarios implements ActionListener, KeyListener {
                     if (clienTipo == 0 && tipoRuc == 0) {
                         JOptionPane.showMessageDialog(null, "El documento de identidad ->" + PersonaComercio_cedulaRuc + "<- parece no ser valido.");
                     } else {
-                        if (combo.equals("Sucursal")) {
-                            letra = "Sucursal";
+                        if (combo.equals("Sucursal_1")) {
+                            letra = "Sucursal 1";
                         }
+                        if (combo.equals("Sucursal_2")) {
+                            letra = "Sucursal 2";
+                        }
+                        if (combo.equals("Sucursal_3")) {
+                            letra = "Sucursal 3";
+                        }
+                        if (combo.equals("Sucursal_4")) {
+                            letra = "Sucursal 4";
+                        }
+                        if (combo.equals("Sucursal_5")) {
+                            letra = "Sucursal 5";
+                        }
+                        
                         if (combo.equals("Principal")) {
                             letra = "Principal";
                         }
@@ -203,9 +216,22 @@ public class ctrl_usuarios implements ActionListener, KeyListener {
                 String username = String.valueOf(vista.tablaUsuarios.getValueAt(filaEditar, 6));
                 String almacen_h = String.valueOf(vista.tablaUsuarios.getValueAt(filaEditar, 7));
                 String estado_h = String.valueOf(vista.tablaUsuarios.getValueAt(filaEditar, 8));
-                if (almacen_h.equals("Sucursal")) {
-                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal");
+                if (almacen_h.equals("Sucursal 1")) {
+                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal_1");
                 }
+                if (almacen_h.equals("Sucursal 2")) {
+                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal_2");
+                }
+                if (almacen_h.equals("Sucursal 3")) {
+                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal_3");
+                }
+                if (almacen_h.equals("Sucursal 4")) {
+                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal_4");
+                }
+                if (almacen_h.equals("Sucursal 5")) {
+                    vista.cmb_empleado_comedor.setSelectedItem("Sucursal_5");
+                }
+                
                 if (almacen_h.equals("Principal")) {
                     vista.cmb_empleado_comedor.setSelectedItem("Principal");
                     

@@ -42,11 +42,11 @@ public class ctrl_cliente implements ActionListener, KeyListener {
         modeloTabla.addColumn("Nombres");
         modeloTabla.addColumn("Apellidos");
         modeloTabla.addColumn("Celular");
-        modeloTabla.addColumn("Tfno. Casa");
-        modeloTabla.addColumn("E-mail");
+        modeloTabla.addColumn("Telf. Casa");
+        modeloTabla.addColumn("Email");
         modeloTabla.addColumn("Dir.Casa");
         modeloTabla.addColumn("Nro.Casa");
-        modeloTabla.addColumn("Tfno. Trabajp");
+        modeloTabla.addColumn("Telf. Trabajp");
         modeloTabla.addColumn("Dir. Trabajo");
         modeloTabla.addColumn("Fec. Nacimiento");
         modeloTabla.addColumn("Estado");

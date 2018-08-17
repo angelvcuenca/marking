@@ -59,7 +59,7 @@
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="92" max="32767" attributes="0"/>
+                  <EmptySpace pref="90" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -252,7 +252,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Tlf. Cas"/>
+                <Property name="text" type="java.lang.String" value="Telf. Cas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -294,7 +294,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Dirc. Casa"/>
+                <Property name="text" type="java.lang.String" value="Direcc. Casa"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -308,7 +308,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Tlf. Trabajo"/>
+                <Property name="text" type="java.lang.String" value="Telf. Trabajo"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_search1">
@@ -444,7 +444,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="NOVAMODA  - CXC PAGOS">
+                <TitledBorder title="NOVAMODA  - CREDITO PERSONAL">
                   <Font PropertyName="font" name="Century Gothic" size="12" style="0"/>
                   <Color PropertyName="color" blue="0" green="66" red="cc" type="rgb"/>
                 </TitledBorder>
@@ -541,9 +541,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/plus-symbol-in-a-rounded-black-square.png"/>
+                  <Image iconType="3" name="/img/carrito-de-la-compra.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Agregar Producto"/>
+                <Property name="text" type="java.lang.String" value="Comprar Producto"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregaActionPerformed"/>
@@ -1011,9 +1011,9 @@
                   <Font name="Century Gothic" size="10" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="99" red="ff" type="rgb"/>
+                  <Color blue="ff" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="talla"/>
+                <Property name="text" type="java.lang.String" value="Talla"/>
               </Properties>
             </Component>
           </SubComponents>

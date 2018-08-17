@@ -37,9 +37,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="49" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="227" y="13" width="362" height="20"/>
+				<reportElement x="5" y="0" width="362" height="20"/>
 				<textElement textAlignment="Justified">
 					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
@@ -80,48 +80,48 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
 				<reportElement style="style1" x="5" y="2" width="61" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[cedula]]></text>
+				<text><![CDATA[Cedula]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="66" y="2" width="157" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[cliente]]></text>
+				<text><![CDATA[Cliente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="223" y="2" width="133" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[direccion]]></text>
+				<text><![CDATA[Dirección]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="356" y="2" width="114" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[telefonos]]></text>
+				<text><![CDATA[Teléfonos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="470" y="2" width="70" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[fecha_emision]]></text>
+				<text><![CDATA[F.Emi. Plan A.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="540" y="2" width="67" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[valor tot.]]></text>
+				<text><![CDATA[Valor Total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="607" y="2" width="76" height="20"/>
@@ -135,14 +135,14 @@
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[saldo total]]></text>
+				<text><![CDATA[Saldo Total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="style1" x="683" y="2" width="61" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[valor abono]]></text>
+				<text><![CDATA[Valor Abono]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -151,63 +151,63 @@
 			<textField>
 				<reportElement style="style2" x="5" y="0" width="61" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" isStrikeThrough="false"/>
+					<font fontName="SansSerif" size="8" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="66" y="0" width="157" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="223" y="0" width="133" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="356" y="0" width="114" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefonos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="540" y="0" width="66" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor_total}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="607" y="0" width="76" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_ult_abono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="683" y="0" width="61" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor_abono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="744" y="0" width="57" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{saldo_total}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="style2" x="470" y="0" width="70" height="33"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_emision}]]></textFieldExpression>
 			</textField>

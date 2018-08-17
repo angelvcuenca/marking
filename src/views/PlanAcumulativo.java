@@ -66,8 +66,8 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         valor_producto.setEnabled(false);
         modeloTabla_cxc.addColumn("Nro");
         modeloTabla_cxc.addColumn("Fecha");
-        modeloTabla_cxc.addColumn("Codigo");
-        modeloTabla_cxc.addColumn("Descripcion");
+        modeloTabla_cxc.addColumn("Código");
+        modeloTabla_cxc.addColumn("Descripción");
         modeloTabla_cxc.addColumn("Valor");
         modeloTabla_cxc.addColumn("Abono");
         modeloTabla_cxc.addColumn("Saldo");
@@ -160,7 +160,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel5.setText("Tlf. Cas");
+        jLabel5.setText("Telf. Cas");
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
@@ -175,14 +175,14 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jLabel11.setBackground(new java.awt.Color(0, 0, 0));
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel11.setText("Dirc. Casa");
+        jLabel11.setText("Direcc. Casa");
 
         jLabel13.setBackground(new java.awt.Color(0, 0, 0));
         jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel13.setText("Tlf. Trabajo");
+        jLabel13.setText("Telf. Trabajo");
 
-        btn_search1.setBackground(new java.awt.Color(102, 0, 102));
+        btn_search1.setBackground(new java.awt.Color(51, 51, 255));
         btn_search1.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_search1.setForeground(new java.awt.Color(255, 255, 255));
         btn_search1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/magnifier (1).png"))); // NOI18N
@@ -255,9 +255,9 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_fono_trabajo_ac, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
+                                .addGap(24, 24, 24)
                                 .addComponent(txt_email_ac, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -294,12 +294,10 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(txt_fono_casa_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_fono_trabajo_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 18, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(3, 3, 3))
+                            .addComponent(txt_fono_trabajo_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
                     .addComponent(txt_email_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txt_dirc_casa_ac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,11 +321,11 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVAMODA  - PLAN ACUMULATIVO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
 
-        btn_agrega.setBackground(new java.awt.Color(0, 102, 255));
+        btn_agrega.setBackground(new java.awt.Color(0, 51, 153));
         btn_agrega.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_agrega.setForeground(new java.awt.Color(255, 255, 255));
-        btn_agrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
-        btn_agrega.setText("Agregar Producto");
+        btn_agrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrito-de-la-compra.png"))); // NOI18N
+        btn_agrega.setText("Comprar Producto");
         btn_agrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregaActionPerformed(evt);
@@ -962,6 +960,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
                     lb_producto.setText("-------");
                     lb_codigo2.setText("-------");
                     pvp_sin_iva.setText("-------");
+                    txt_observaciones_pac.setText("");
 //                pvp_con_iva.setText("-------");
                     valor_producto.setEnabled(false);
                     valor_producto.setText("0");
@@ -1010,7 +1009,7 @@ public class PlanAcumulativo extends javax.swing.JInternalFrame {
             String tlf = txt_celular_ac.getText();
             String nro_funda = txt_nro_funda.getText();
             String obser = txt_observaciones_pac.getText();
-            map.put("titulo", "COMPROBANTE PLAN ACUMULATIVO");
+            map.put("titulo", "COMPROBANTE DE PLAN ACUMULATIVO - CALZADO NOVAMODA");
             map.put("cliente", client);
             map.put("direccion", dir);
             map.put("celular", tlf);

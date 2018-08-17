@@ -42,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         menu_usuarios.setVisible(false);
         menu_informes.setVisible(false);
         menu_config.setVisible(false);
+        menu_institucional.setVisible(false);
 
         roles_user(mod.getId());
         label_user_registro.setText(mod.getNombres());
@@ -58,8 +59,12 @@ public class Principal extends javax.swing.JFrame {
             ps.setString(1, id_empleado);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if (rs.getString(2).equals("Vista CxC")) {
+                System.out.println("--->"+rs.getString(2));
+                if (rs.getString(2).equals("Vista Credito Personal")) {
                     menu_cxc.setVisible(true);
+                }
+                if (rs.getString(2).equals("Vista Credito Institucional")) {
+                    menu_institucional.setVisible(true);
                 }
                 if (rs.getString(2).equals("Vista Plan Acumulativo")) {
                     menu_plan_acumulativo.setVisible(true);
@@ -79,6 +84,7 @@ public class Principal extends javax.swing.JFrame {
                 if (rs.getString(2).equals("Vista Configuraciones")) {
                     menu_config.setVisible(true);
                 }
+                
 
             }
 
@@ -111,7 +117,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_cxc = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        menu_cxc1 = new javax.swing.JMenu();
+        menu_institucional = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -252,10 +258,10 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_cxc);
 
-        menu_cxc1.setBackground(new java.awt.Color(204, 204, 204));
-        menu_cxc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money.png"))); // NOI18N
-        menu_cxc1.setText("Credito Institucional");
-        menu_cxc1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        menu_institucional.setBackground(new java.awt.Color(204, 204, 204));
+        menu_institucional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/empresa.png"))); // NOI18N
+        menu_institucional.setText("Credito Institucional");
+        menu_institucional.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
         jMenuItem2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
@@ -265,7 +271,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        menu_cxc1.add(jMenuItem2);
+        menu_institucional.add(jMenuItem2);
 
         jMenuItem6.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
@@ -275,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        menu_cxc1.add(jMenuItem6);
+        menu_institucional.add(jMenuItem6);
 
         jMenuItem10.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
@@ -285,7 +291,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        menu_cxc1.add(jMenuItem10);
+        menu_institucional.add(jMenuItem10);
 
         jMenuItem16.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
@@ -295,9 +301,9 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem16ActionPerformed(evt);
             }
         });
-        menu_cxc1.add(jMenuItem16);
+        menu_institucional.add(jMenuItem16);
 
-        jMenuBar1.add(menu_cxc1);
+        jMenuBar1.add(menu_institucional);
 
         menu_plan_acumulativo.setBackground(new java.awt.Color(255, 255, 255));
         menu_plan_acumulativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet.png"))); // NOI18N
@@ -389,7 +395,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem7.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proximo (2).png"))); // NOI18N
-        jMenuItem7.setText("Informe CxC");
+        jMenuItem7.setText("Informe Credito Personal");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -634,8 +640,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_cliente;
     private javax.swing.JMenu menu_config;
     private javax.swing.JMenu menu_cxc;
-    private javax.swing.JMenu menu_cxc1;
     private javax.swing.JMenu menu_informes;
+    private javax.swing.JMenu menu_institucional;
     private javax.swing.JMenu menu_plan_acumulativo;
     private javax.swing.JMenu menu_producto;
     private javax.swing.JMenu menu_usuarios;

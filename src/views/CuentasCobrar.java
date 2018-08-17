@@ -61,8 +61,8 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         valor_producto.setEnabled(false);
         modeloTabla_cxc.addColumn("Nro");
         modeloTabla_cxc.addColumn("Fecha");
-        modeloTabla_cxc.addColumn("Codigo");
-        modeloTabla_cxc.addColumn("Descripcion");
+        modeloTabla_cxc.addColumn("Código");
+        modeloTabla_cxc.addColumn("Descripción");
         modeloTabla_cxc.addColumn("Valor");
         modeloTabla_cxc.addColumn("Abono");
         modeloTabla_cxc.addColumn("Saldo");
@@ -150,7 +150,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel5.setText("Tlf. Cas");
+        jLabel5.setText("Telf. Cas");
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
@@ -165,12 +165,12 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         jLabel11.setBackground(new java.awt.Color(0, 0, 0));
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel11.setText("Dirc. Casa");
+        jLabel11.setText("Direcc. Casa");
 
         jLabel13.setBackground(new java.awt.Color(0, 0, 0));
         jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel13.setText("Tlf. Trabajo");
+        jLabel13.setText("Telf. Trabajo");
 
         btn_search1.setBackground(new java.awt.Color(102, 0, 102));
         btn_search1.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
@@ -306,13 +306,13 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVAMODA  - CXC PAGOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12), new java.awt.Color(204, 102, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVAMODA  - CREDITO PERSONAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12), new java.awt.Color(204, 102, 0))); // NOI18N
 
         btn_agrega.setBackground(new java.awt.Color(0, 102, 255));
         btn_agrega.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         btn_agrega.setForeground(new java.awt.Color(255, 255, 255));
-        btn_agrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus-symbol-in-a-rounded-black-square.png"))); // NOI18N
-        btn_agrega.setText("Agregar Producto");
+        btn_agrega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrito-de-la-compra.png"))); // NOI18N
+        btn_agrega.setText("Comprar Producto");
         btn_agrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregaActionPerformed(evt);
@@ -504,8 +504,8 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
 
         jLabel20.setBackground(new java.awt.Color(0, 0, 0));
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 153, 102));
-        jLabel20.setText("talla");
+        jLabel20.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel20.setText("Talla");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -580,7 +580,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -867,6 +867,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
                     //pvp_con_iva.setText("-------");
                     valor_producto.setEnabled(false);
                     valor_producto.setText("0");
+                    txt_observaciones_cc.setText("");
                     txt_abono.setText("0");
                     btn_agrega.setEnabled(false);
                     btn_abonar.setEnabled(true);
@@ -912,7 +913,7 @@ public class CuentasCobrar extends javax.swing.JInternalFrame {
             String tlf = txt_celular.getText();
             String obser = txt_observaciones_cc.getText();
 
-            map.put("titulo", "COMPROBANTE CxC");
+            map.put("titulo", "COMPROBANTE DE CREDITO PERSONAL - CALZADO NOVAMODA");
             map.put("cliente", client);
             map.put("direccion", dir);
             map.put("celular", tlf);
