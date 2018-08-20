@@ -24,8 +24,8 @@ public class conexion_bd {
     public String nameservidor = "localhost";
     public String db = "bill_novamoda";
     public String user = "root";
-    //public String pass = "Masterpc%%16";
-    public String pass = "";
+    public String pass = "Masterpc%%16";
+    //public String pass = "";
     public String ruta = "jdbc:mysql://";
     public String servidor = nameservidor + ":" + puerto + "/";
 
